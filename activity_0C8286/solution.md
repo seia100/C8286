@@ -41,11 +41,13 @@ sudo docker container run rancher/cowsay Hello-seia
 
 ``` 
 probamos ejecutar sin sudo
+
 ![doc_ver](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/doc_vers.png)
 
 ahora procedemos a instalar docker desktop https://docs.docker.com/desktop/install/linux-install/
 
 si la instalacion esta de manera correcta deberia de salir del siguiente modo para ocnfigurar de **kubernets**
+
 ![doc_desk](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/doc_desk.png)
 
 
@@ -62,6 +64,7 @@ kubectl config get-contexts
 kubectl get nodes
 ```
 posterior a ejecutar los comandos anteriores se debe mostrar del siguiente modo
+
 ![minikube_and_kubectl](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/kubectl_config_get.png)
 
 Aquí tenemos un clúster de un solo nodo. El papel del nodo es el del plano de control, loque significa que es un nodo maestro. Un clúster de Kubernetes típico consta de unospocos nodos maestros y muchos nodos trabajadores.
@@ -112,17 +115,18 @@ kubectl expose pod nginx --type=NodePort --port=80
 Esta es la única forma en que podemos acceder a Nginx desde nuestra computadoraportátil, por ejemplo, a través de un navegador. Con el comando anterior, estamos creandoun servicio de Kubernetes, como se indica en el resultado generado para el comando:`service/nginx exposed`
 
 6. Podemos usar kubectl para enumerar todos los servicios definidos en nuestro clúster:
-`
+```
 kubectl get services
-`
+```
 En el resultado anterior, podemos ver el segundo servicio llamado Nginx, que acabamos decrear. El servicio es del tipo NodePort; El puerto 80 del pod se había asignado al puerto30432 del nodo del clúster de nuestro clúster de Kubernetes en minikube
 
 ![apply3456](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/apply)
 
 
 7.  Ahora, podemos usar minikube para crear un túnel hacia nuestro clúster y abrir unnavegador con la URL correcta para acceder al servidor web Nginx. Utilice este comando:
-`
+```
 minikube service nginx
-`
+```
 si te sale el siguiente "error": `❌  Exiting due to MK_UNIMPLEMENTED: minikube service is not currently implemented with the builtin network on QEMU` traquilo(a) vamos a solucionarlo
+ok no seeee :v
 
