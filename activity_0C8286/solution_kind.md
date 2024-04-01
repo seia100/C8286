@@ -74,6 +74,7 @@ Antes de continuar, limpiemos y eliminemos los dos clústeres que acabamos de cr
 kind delete cluster --name kind
 kind delete cluster --namem demo-seia
 ```
+puede servir :) https://blog.serialexperiments.co.uk/posts/kubernetes-port-forward-already-in-use/
 Con esto andamo feli :3 
 *No olvidar de revisar las preguntas :3
 
