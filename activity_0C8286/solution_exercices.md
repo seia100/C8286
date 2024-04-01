@@ -21,8 +21,12 @@ minikube stop -p demo
 ```
 minikube delete --all
 ```
+
+![demo_clusters](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/demo_multiclusters.png)
+
 y ps biennn ahora zomozz :3
 
-continuamos con la actividad de Kind
+continuamos con la actividad de [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).
+
 
 
