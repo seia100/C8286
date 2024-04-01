@@ -56,6 +56,25 @@ kubectl get nodes
 
 4. Ahora, intentemos ejecutar el primer contenedor en este clúster. Usaremos nuestroservidor web Nginx de confianza, como hicimos antes. Utilice el siguiente comando paraejecutarlo:
 ```
-kapply -f nginx.yaml
+kubectl apply -f nginx.yaml
 ```
-5. 
+5. Para acceder al servidor Nginx, necesitamos realizar el reenvío de puertos usandokubectl. Utilice este comando para hacerlo:Revisa: kubectl describe pod nginx, https://www.kristhecodingunicorn.com/post/kubernetes-port-forwarding-cleanup-of-orphaned-ports/
+```
+kubectl port-forward nginx 8080:80 
+```
+Tener en cuenta que se puede usar otros puertos 
+un vez que se haya completado la intencion o el proposito de la actividad _kind_ 
+Eliminamos el pod del cluster
+```
+kind delete -f nginx.yaml
+```
+
+Antes de continuar, limpiemos y eliminemos los dos clústeres que acabamos de crear:
+```
+kind delete cluster --name kind
+kind delete cluster --namem demo-seia
+```
+Con esto andamo feli :3 
+*No olvidar de revisar las preguntas :3
+
+FINISH
