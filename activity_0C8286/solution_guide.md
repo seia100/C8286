@@ -163,3 +163,10 @@ strace -eopenat kubectl version
 ```
 soprendente, cierto? tanto que a mi no me corrigio y por recomendacion del mismo foro probaremos `sudo systemctl restart kubelet`
 
+SABEN ALGO?? es mejor tomarse un DESCANCITO :3. Apague mi pc y lo estoy retomando y resulta que ahora si se ejecuta normal... No sabria muy bien cual fue el problema ya que incluso intente con esta documentacion pero no funcionoo del todo bn jejje
+* https://github.com/kubernetes/kubeadm/issues/684 este fue para ver las imagenes que docker esta corriendo y demas informacion.
+
+* [Docker Stop All Containers | One Command To Stop and/or Remove Every Docker Container](https://ioflood.com/blog/docker-stop-all-containers-one-command-to-stop-and-or-remove-every-docker-container/)
+* [How to Stop and Remove Docker Containers](https://spacelift.io/blog/docker-stop-container)
+
+* 
