@@ -130,3 +130,36 @@ minikube service nginx
 si te sale el siguiente "error": `❌  Exiting due to MK_UNIMPLEMENTED: minikube service is not currently implemented with the builtin network on QEMU` traquilo(a) vamos a solucionarlo
 ok no seeee :v
 
+Despues de un receso profundo :DD revisando repos de los que me pueda ayudar me tope con mas errores. Adjutno los links de los que me servi para inspeccionar, curiosear, que tal vez se _invierta_ buen tiempo
+* [QEMU2 Driver](https://github.com/kubernetes/minikube/issues/14146) # mas interesante tal vez
+* [qemu - use builtin](https://minikube.sigs.k8s.io/docs/drivers/qemu/)
+* [kube-proxy is forbiden](https://github.com/kubernetes/minikube/issues/7613)
+
+* https://github.com/kubernetes/minikube/issues/7613
+* https://github.com/kubernetes/minikube/issues/8844
+* [running callbacks - minikube start](https://github.com/kubernetes/minikube/issues/9556)
+  
+Sin embargo la mas efectiva, para mi, fue `minikube delete` y empezar todo desde cero. Todo me refiero desde `(...)acceder a nuestro clúster usando kubectl (...) `
+y siii FUNCIONO :D
+
+![service nginx](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/service_dep.png)
+
+Si bien se puede notar dos tablitas, pero fue porque se me fue el internet jjejje :3
+
+![welcome nginx](https://github.com/seia100/C8286/blob/main/activity_0C8286/assets/welcome_nginx.png)
+
+### Espera si te funciono y ahora te sale este error???
+`The connection to the server 127.0.0.1:35379 was refused - did you specify the right host or port?`
+
+Ya somos 2 :D 
+Revisando elgunos foros la solucion reside aqui https://discuss.kubernetes.io/t/the-connection-to-the-server-host-6443-was-refused-did-you-specify-the-right-host-or-port/552/4 
+
+```
+sudo -i
+swapoff -a
+exit
+strace -eopenat kubectl version
+
+```
+soprendente, cierto? tanto que a mi no me corrigio y por recomendacion del mismo foro probaremos `sudo systemctl restart kubelet`
+
