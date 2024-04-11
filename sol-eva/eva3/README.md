@@ -109,7 +109,7 @@ if __name__=='__main__':
 ```
 
 guardamos y ejecuatamos la app web de ejemplo
-```
-python3 sample_app.py
+```bash 
+$ python3 sample_app.py
 ```
 
