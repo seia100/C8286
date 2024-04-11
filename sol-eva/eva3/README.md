@@ -10,6 +10,8 @@ Parte 4: Crear un script de Bash para compilar y ejecutar un contenedor Docker
 
 Parte 5: Construir, ejecutar y verificar el contenedor Docker
 
+*tener en cuenta que los archivos python o ejecutables estaran presentes en la carpeta `assets` de la actividad.
+
 ### Resultado final:
 // Enter the final result.
 
@@ -110,6 +112,29 @@ if __name__=='__main__':
 
 guardamos y ejecuatamos la app web de ejemplo
 ```bash 
-$ python3 sample_app.py
+python3 sample_app.py
 ```
+el ouptput deberia de ser:
+```shell 
+* Serving Flask app "sample app" (lazy loading)
+* Environment: production
+ADVERTENCIA: Este es un servidor de desarrollo. No lo utilice en una
+implementación de producción.
+Utilice un servidor WSGI de producción en su lugar.
+*Modo de depuración: apagado
+* Ejecutando en http://0.0.0.0:8080/ (Presione CTRL+C para salir)
+```
+Comprobar que el servidor se está ejecutando.
+Puede verificar que el servidor se está ejecutando de dos maneras.
+1. Abra el navegador web Chromium e introduzca 0.0.0.0:8080 en el campo URL. Debería
+obtener la siguiente salida:
+Me estás llamando desde 127.0.0.1
+Si recibe una respuesta de "HTTP 400 Bad Request", compruebe cuidadosamente su script
+sample_app.py.
+2. Abrir otra ventana de terminal y utilice la herramienta URL de línea de comandos (cURL)
+para verificar la respuesta del servidor
+```
+curl http://0.0.0.0:8080
+```
+para detener el servidor o intancia ejecutada press `CTRL + C`
 
