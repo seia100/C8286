@@ -101,6 +101,7 @@ enrutamiento (routing) (. route) para referirse a una URL de aplicación (esto n
 el enrutamiento de red). Aquí el "/" (directorio raíz) está enlazado a la función main (). Por lo tanto,
 cuando el usuario va a http://localhost:8080/ (directorio raíz) URL, la salida de la declaración de
 retorno se mostrará en el navegador.
+'''
 
 # Configurar la aplicación para que se ejecute localmente.
 if __name__=='__main__':
