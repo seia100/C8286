@@ -85,7 +85,7 @@ pip3 install flask
 Cremaos nuesta app sencilla y es por ello que creamos el archivo sample_app.py
 ``` python3
 from flask import Flask
-from flask impor request
+from flask import request
 
 #Crear una instancia de la clase Flask.
 sample = Flask(__name__)
