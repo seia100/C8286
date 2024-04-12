@@ -39,6 +39,24 @@ instalar docker es instalar todos los componentes para comunicar todo el time co
 
 una contendor tiene un estado y lo podemos moficar _Stateful_ 
 
+palabras clave
+- name spaces
+- grupos de control: son los que nos ayudan en un contenedor no tenga el sindrome del vecino ruidoso. Que un contenedor no se coma todos los recursos disponibles del docker host. como controlar ram, etc.
+- capacidad de las capas
+
+
+espacio de nombres del ID del proceso 
 
 stratificacion o _layering_ puede optimizar mas lo demas :)
 
+si podemos contralar en la primera capa poemos hacer un mejor manejo de las primitivas que nos brinda  linux
+
+run: es la funcionalidad de bajo nivel del tiempo de ejecucion/ encargado del tiempo de vida del contenedor
+
+container: se basa en run y se enarga en la administracion de imagenes, tambien tiene capacidad de redes. son de codigo abierto ambos.
+
+docker engine: proporciona funcionalidades.
+_________________________
+interfaz de REST
+  es importante porque me permite automatizar todas las operaciones de contenedores. y es por eso es importante.
+  la interfaz de la linea de comandos de docker e.
