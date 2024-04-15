@@ -138,3 +138,80 @@ curl http://0.0.0.0:8080
 ```
 para detener el servidor o intancia ejecutada press `CTRL + C`
 
+## Parte 3: Configurar la aplicación web para utilizar archivos de sitio web
+
+* epxlorar los directorios que utilizara la aplicacion web
+para ello tener en cuenta que debemos crear los directorios dentro de `app-web` tanto `static ` y el dorectorio `templates` en los que van a crearse los archivos `style.css` e `index.html` respectivamente.
+  * Editamos ambos archivos. El siguiente codigo corresponde a `index.html`
+  * ```html
+    <html>
+    <head>
+      <title>Sample aplication</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+    </head>
+      <body>
+        <h1>Calling me from: {{request.remore_addr}}</h1>
+      </body>
+    </html>
+    ```
+ *  Codigo para el archivo `style.css`
+ *   ```css
+     body {background: darksteelblue;}
+     ```
+
+
+* Actualizar el cod python para la apliacion web de muestra
+  actualizamos el archivo `sample_app.py`de modo que nos reenderice el archivo `index.html`
+
+  El archivo HTML se puede reenderizar automaticamente en Flask usando la funcion reder_template es por ello que vamos a editar `sample_app.py`
+  ```python
+  from flask import Flask, request, render_template
+
+  sample = Flask (__name__)
+
+  @sample .route("/")
+  def main():
+  return render_template ("index.html",request=request)
+
+  if __name__ == "__main__":
+    sample.run (host="0.0.0.0", port=8080)
+  ```
+
+🗒️ **NOTE:** No olvides de guardar cambios
+ejecutamos el script no olvides de activar tu entorno virtual en python para que no haya errores :)
+
+Si obtienes el siguiente resultado, **genial hemos progresado**
+![execute-program](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/run_server.png)
+
+He hecho muchas consultas, considero que es la carga que le damos al servidor. Por lo que seria necesario un balanceador de carga o no se el por que cuando ejeccuto `curl 0.0.0.0:8080` no me sale nada relacionado al respecto. Por lo que asumo eso. Comprobe en el _browser_ y se queda cargando. Es por ello que llegue a tal conclusion :)
+
+## Parte 4: Crear un script de Bash para compilar y ejecutar un contenedor Docker
+1. Crear directorios temporales para almacenar los archivos del sitio web.
+  ```bash
+   #!/bin/bash
+   
+   # Creamos directorios de manera recursiva con el parametro -p
+   mkdir -p tempdir/templates/static
+  ```
+
+   
+  
+2. Copiar los  directorios del sitio web y sample_app.py en el directorio temporal.
+  
+3. Crear un archivoo docker (Dockerfile)
+   a. Necesita que python se ejecute en el contenedor, asi que agregue el comando Docker `FROM` para instalar Python en el contenedor.
+    ```bash
+    echo "FROM python" >> tempdir/Dockerfile
+    ```
+    
+  b. su script `sample_app.py` necesita Flask, por lo que agregamos el comando Docker para instalar Flask en el contenedor.
+    ```bash
+    echo "RUN pip install flask" >> tempdir/Dockerfile
+    ```
+  c. El contendedor necesitara las carpetas del sitio web y el script
+  FALTA STEPS
+6. Construir el contenedor Docker
+7. Iniciar el contenedor y comprobar que se esta ejecutando.
+
+
+
