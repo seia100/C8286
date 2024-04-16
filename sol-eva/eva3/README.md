@@ -197,7 +197,12 @@ He hecho muchas consultas, considero que es la carga que le damos al servidor. P
    
   
 2. Copiar los  directorios del sitio web y sample_app.py en el directorio temporal.
-  
+  ```
+  cp sample_app.py tempdir/.
+  cp -r templates/. tempdir/templates/.
+  cp -r static/* tempdor/static/.
+  ```
+
 3. Crear un archivoo docker (Dockerfile)
    a. Necesita que python se ejecute en el contenedor, asi que agregue el comando Docker `FROM` para instalar Python en el contenedor.
     ```bash
@@ -208,7 +213,9 @@ He hecho muchas consultas, considero que es la carga que le damos al servidor. P
     ```bash
     echo "RUN pip install flask" >> tempdir/Dockerfile
     ```
-  c. El contendedor necesitara las carpetas del sitio web y el script
+  c. El contendedor necesitara las carpetas del sitio web y el script `sample_app.py` oara ejecutar la aplicacion, asi que agregale los comandos de Docker **COPY** para agregarlos a un directorio en el contenedor DOcker. En este ejemplo creara `/home/myapp` como directorio principal dentro del contenedor Docker. Ademas de copiar el archivo *sample_app.py* al archivo Dockerfile, tammbien cipuara el archivo *index.html* del dorectorio de plantillas u el archivo *style del directorio *static*
+
+  
   FALTA STEPS
 6. Construir el contenedor Docker
 7. Iniciar el contenedor y comprobar que se esta ejecutando.
