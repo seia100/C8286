@@ -202,7 +202,63 @@ He hecho muchas consultas, considero que es la carga que le damos al servidor. P
   cp -r templates/. tempdir/templates/.
   cp -r static/* tempdor/static/.
   ```
+* Tener en cuenta que todo es en el mismo archivo.
+* es un archivo sh repetimos los pasos anteirores para poder ejecutarlo.
 
+Si te preguntas por mi codigo, tranqui ahora lo ubico
+
+```bash
+#! /bin/bash
+
+# esto se tiene que ejecutar en el directorio app-web de 
+# lo contrario no lo va a identificar los directorios a copiar :)
+
+: '
+echo -n "Enter your name: "
+read userName
+echo "Your name is aise"
+'
+
+# la siguiente linea la voy comentar porque algunos directorios ya fueron creados
+## mkdir -p tempdir/templates/static
+
+# es por ello que usaremos estructuras de control
+if [ ! -d "tempdir/templates"]; then
+    mkdir -p tempdir/templates
+fi
+
+if [ ! -d "tempdir/static"]; then 
+    mkdir -p tempdir/static 
+
+fi 
+
+# copiamos los directorios del sitio web y sample_app.py 
+# en el directorio temporal `tempdir`
+
+#en este caso el argumento _n_ es para evitar sobreescribir files que ya fueron copiados
+cp -n sample_app.py tempdir/ .
+cp -rn templates/* tempdir/templates/.
+cp -rn static/* tempdir/static/. 
+
+
+
+```
+Pueda que te salte algunos errores tener en cuenta y por que se ve asi. Resulta que hubo un typo y mi idea no era sobreescribir archivos y continuar con lo que copias. No se si me dejo entender. El punto es que lo ejecute el cod de la guia y como estaba mal se interrumpio "copiar"
+
+El resultado te debe quedar de la siguiente manera:
+![cp_mkdir](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/mkdir_cp.png)
+
+________________________________________________
+* **IMPORTANT**
+  *   Command Explanation
+    * The cp command in Linux is used to copy files and directories. The following options can be particularly useful:
+      * `-n, --no-clobber`: This option will prevent cp from overwriting existing files. If a file already exists in the destination directory, it won't be overwritten, and cp will simply skip the copy operation for that file.
+      * ` -u, --update`: With this option, cp will only copy a file if it either doesn't exist at the destination or if the source file is newer than the destination file. This can be useful if you're repeatedly copying files and always want to ensure you have the most recent versions.
+
+_________________________________________________
+
+
+ 
 3. Crear un archivoo docker (Dockerfile)
    a. Necesita que python se ejecute en el contenedor, asi que agregue el comando Docker `FROM` para instalar Python en el contenedor.
     ```bash
