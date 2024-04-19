@@ -269,7 +269,7 @@ _________________________________________________
     ```bash
     echo "RUN pip install flask" >> tempdir/Dockerfile
     ```
-  c. El contendedor necesitara las carpetas del sitio web y el script `sample_app.py` oara ejecutar la aplicacion, asi que agregale los comandos de Docker **COPY** para agregarlos a un directorio en el contenedor DOcker. En este ejemplo creara `/home/myapp` como directorio principal dentro del contenedor Docker. Ademas de copiar el archivo *sample_app.py* al archivo Dockerfile, tammbien cipuara el archivo *index.html* del dorectorio de plantillas u el archivo *style del directorio *static*
+  c. El contendedor necesitara las carpetas del sitio web y el script `sample_app.py` para ejecutar la aplicacion, asi que agregale los comandos de Docker **COPY** para agregarlos a un directorio en el contenedor DOcker. En este ejemplo creara `/home/myapp` como directorio principal dentro del contenedor Docker. Ademas de copiar el archivo *sample_app.py* al archivo Dockerfile, tammbien cipuara el archivo *index.html* del dorectorio de plantillas u el archivo *style del directorio *static*
 
   
   FALTA STEPS
