@@ -33,10 +33,46 @@ el resultado que me brinda es correcto
 
 ![running](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/running.png)
 
-`docker ps -a`
+Investigamos el detalle de las _images_
+`docker ps -a` y menos detalle es `docker ps `
 ![ps-a](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/ps-a.png)
 
+![ps](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/ps.png)
 
+________________
+IMPORTANT
+
+conocer los puertos abiertos 
+
+```bash
+sudo lsof -i :8080
+#o tambien
+sudo netstat -tulpn | grep :8080
+```
+liberar puerto deteniendo el proceso. Donde PID es el número de ID del proceso que quieres terminar.
+
+```bash
+sudo kill -9 PID
+```
+_______________________
+
+Accedemos al contenedor en ejecucion
+```bash
+docker exec <id_container> /bin/bash
+```
+![sudo-ls-docker](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/lsdocker.png)
+
+La salida del comando docker ps -a puede ser difícil de leer dependiendo del ancho de la 
+pantalla de su terminal. Puede redirigirlo a un archivo de texto donde puede verlo mejor sin 
+ajustar palabras
+```shell
+docker ps -a >> running.txt
+```
+Detemer el contenedor
+![close](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/close.png)
+
+
+#########################################
 * construimos el contenedor
 ```bash
 docker build -t la-ult
