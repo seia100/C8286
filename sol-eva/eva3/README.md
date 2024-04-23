@@ -15,6 +15,34 @@ Parte 5: Construir, ejecutar y verificar el contenedor Docker
 ### Resultado final:
 // Enter the final result.
 
+Dentro de los ultimos pasos es que hice algunas modificaciones ya que de lo contrario ejecutaba de manera correcta
+el _script_ del _Dockerfile_ es el siguiente:
+```Dockerfile
+FROM python:3.9 # opcional especificar la version
+RUN pip install flask
+
+COPY ./static /home/myapp/static
+COPY ./templates /home/myapp/templates
+COPY sample_app.py /home/myapp/
+
+EXPOSE 8080
+CMD python3 /home/myapp/sample_app.py
+```
+* no ejecute el paso en el que crea una instancia
+el resultado que me brinda es correcto
+
+![running](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/running.png)
+
+`docker ps -a`
+![ps-a](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/ps-a.png)
+
+
+* construimos el contenedor
+```bash
+docker build -t la-ult
+```
+
+
 ## Part1: Crear un scrip simple
 En caso que no hayas creado tu entorno y demas quiero es importante que crees la carpeta requerida puedes usar `mkdir` para crear el nuevo o nuevos directorios. Abrimos el directorio creado y creamos un archivo `user-input.sh`
 ```
@@ -187,21 +215,24 @@ He hecho muchas consultas, considero que es la carga que le damos al servidor. P
 
 ## Parte 4: Crear un script de Bash para compilar y ejecutar un contenedor Docker
 1. Crear directorios temporales para almacenar los archivos del sitio web.
-  ```bash
+  
+```bash
    #!/bin/bash
    
    # Creamos directorios de manera recursiva con el parametro -p
    mkdir -p tempdir/templates/static
-  ```
+```
 
    
   
 2. Copiar los  directorios del sitio web y sample_app.py en el directorio temporal.
-  ```
+
+```bash
   cp sample_app.py tempdir/.
   cp -r templates/. tempdir/templates/.
   cp -r static/* tempdor/static/.
-  ```
+```
+
 * Tener en cuenta que todo es en el mismo archivo.
 * es un archivo sh repetimos los pasos anteirores para poder ejecutarlo.
 
@@ -259,22 +290,91 @@ _________________________________________________
 
 
  
-3. Crear un archivoo docker (Dockerfile)
+3. Crear un archivoo docker (Dockerfile) 
+
+* En este paso, introduzca los comandos bash echonecesarios en el archivo sample-app.shpara crear un archivo Dockerfile en el tempdir. Este archivo Dockerfile se utilizará para construir el contenedor.
+
+Tener en cuenta que todos los siguientes comandos se ejecutan en la linea de comandos o en el archivo ejecutable sample-app.sh
+
    a. Necesita que python se ejecute en el contenedor, asi que agregue el comando Docker `FROM` para instalar Python en el contenedor.
+
     ```bash
     echo "FROM python" >> tempdir/Dockerfile
     ```
     
   b. su script `sample_app.py` necesita Flask, por lo que agregamos el comando Docker para instalar Flask en el contenedor.
+
     ```bash
     echo "RUN pip install flask" >> tempdir/Dockerfile
     ```
   c. El contendedor necesitara las carpetas del sitio web y el script `sample_app.py` para ejecutar la aplicacion, asi que agregale los comandos de Docker **COPY** para agregarlos a un directorio en el contenedor DOcker. En este ejemplo creara `/home/myapp` como directorio principal dentro del contenedor Docker. Ademas de copiar el archivo *sample_app.py* al archivo Dockerfile, tammbien cipuara el archivo *index.html* del dorectorio de plantillas u el archivo *style del directorio *static*
 
+  ```bash
+  echo "RUN pip install flask">> tempdir/Dockerfile
+  echo "COPY ./templates /home/myapp/templates/ ">> tempdir/Dockerfile
+  echo "COPY sample_app.py /home/myapp/">>tempdir/Dockerfile
+  ```
+  d. Utiliza el comnado Docker `EXPOSE` para exponer el puerto 8080 para su uso por el servidor web.
   
-  FALTA STEPS
-6. Construir el contenedor Docker
-7. Iniciar el contenedor y comprobar que se esta ejecutando.
+  ```bash
+  echo "EXPOSE 8080">>tempdir/Dockerfile
+  ```
 
+  e. Finalmente, agregue el comando Docker `CMD` para ejecutar el script de Python.
+
+  ```bash
+  echo "CMD python3 /home/myapp/sample_app.py">> tempdir/Dockerfile
+  ```
+
+Considerar que se el _file_ ejecutable debe tener la siguiente forma:
+```Dockerfile 
+FROM python
+RUN pip install flask
+
+COPY ./static /home/myapp/static/~
+COPY ./templates /home/myapp/
+COPY sample_app.py /home/myapp/
+
+#COPY ./app-web/sample_app,py /home/myapp/
+EXPOSE 8080
+CMD python3 /home/myapp/sample_app.py
+
+```
+ser muy cuidadoso al momento que se crea el contenedor. Ya que en mi caso copie mal el `Dockerfile` y tuve que hacer desde cero
+
+
+6. **Construir el contenedor Docker**
+
+Agregue los comandos al archivo sample-app.sh para cambiar al directorio tempdir y cree el contenedor Docker. La opción `-t` del comando de `docker build` le permite especificar el nombre del contenedor y el período final (.) indica que desea que el contenedor se construya en el directorio actual
+
+```bash
+cd tempdir
+docker build -t first-app .
+
+```
+
+7. Iniciar el contenedor y comprobar que se esta ejecutando.
+a. Agregar el comando docker run al archivo sample-sh para inicial el contenedor
+```bash
+docker run -t -d -p 8080:8080 --name samplerunning first-app
+```
+Las opciones de docker run indican lo siguiente: 
+• `-t` especifica que desea crear un terminal para el contenedor para que pueda acceder a él en 
+la línea de comandos. 
+• `-d` indica que desea que el contenedor se ejecute en segundo plano e imprima el ID del 
+contenedor al ejecutar el comando docker ps -a. 
+• `-p` especifica que desea publicar el puerto interno del contenedor en el host. El primer «8080" 
+hace referencia al puerto para la aplicación que se ejecuta en el contenedor Docker (nuestra 
+sampleapp). el segundo «8080" le dice a Docker que use este puerto en el host. Estos 
+valores no tienen que ser los mismos. Por ejemplo, un puerto interno 80 a 800 externo 
+(80:800). 
+• `--name` especifica primero lo que desea llamar a la instancia del contenedor 
+(samplerunning) y luego la imagen del contenedor en la que se basará la instancia 
+(sampleapp). El nombre de la instancia puede ser cualquier cosa que desee. Sin embargo, 
+el nombre de la imagen debe coincidir con el nombre del contenedor que especificó en el 
+comando de compilación de docker (first-app). 
+(b)  Agregue el comando docker ps -a para mostrar todos los contenedores Docker que se están 
+ejecutando actualmente. Este comando será el último ejecutado por el script bash. 
+`docker ps -a`
 
 
