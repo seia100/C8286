@@ -31,6 +31,13 @@ CMD python3 /home/myapp/sample_app.py
 * no ejecute el paso en el que crea una instancia
 el resultado que me brinda es correcto
 
+
+* construimos el contenedor
+```bash
+docker build -t la-ult
+```
+
+
 ![running](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/running.png)
 
 Investigamos el detalle de las _images_
@@ -68,15 +75,13 @@ ajustar palabras
 ```shell
 docker ps -a >> running.txt
 ```
-Detemer el contenedor
+
+
+Detener el contenedor
 ![close](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/close.png)
 
 
 #########################################
-* construimos el contenedor
-```bash
-docker build -t la-ult
-```
 
 
 ## Part1: Crear un scrip simple
