@@ -36,7 +36,11 @@ el resultado que me brinda es correcto
 ```bash
 docker build -t la-ult
 ```
-
+* corremos el contenedor
+  ```bash
+  docker run -p 8080:8080 la-ult
+  ```
+  * tener en cuenta que muchas de las veces el puerto esta ocupado por lo que es necesario revisar. Dejo en la parte baja detalle.
 
 ![running](https://github.com/seia100/C8286/blob/main/sol-eva/eva3/running.png)
 
