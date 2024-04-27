@@ -1,7 +1,6 @@
 #### Source
-[page](https://linuxcommand.org/lc3_learning_the_shell.php)
+# [Learning the shell](https://linuxcommand.org/lc3_learning_the_shell.php)
 
-# Learning the shell
 ```bash
 du -s * | sort -nr > $HOME/user_space_report.txt
 ```
@@ -50,12 +49,13 @@ en este caso el comando del que se esta usando es para calcular el uso del espac
 
 
 #### how use `cp`
-![cpwildcards](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp1.png)
-![cpwildcards2](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp2.png)
-![cpwildcard](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp3.png)
+* `cp -i` solicita confirmacion. si el archivo existe te pide que confirmes para que sobreescribas
+* `cp` Mientras copia el archivo a otra direccion y si no existe el nombre de `file2` lo crea
 
-#### Output
 ![cp-practice](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp-practice.png)
+
+### mv
+comando para mover de un direcotrio/archivo a otro un directorio/archivo.
 
 
 
