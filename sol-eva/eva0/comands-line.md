@@ -35,3 +35,28 @@ en este caso el comando del que se esta usando es para calcular el uso del espac
 * notar que hago uso de `ls -a`. La opcion _a_ me permite visualizar los archivos que son "." o ".."
 
 
+## Looking around 
+* [ls](https://linuxcommand.org/lc3_man_pages/ls1.html): list files and directories
+* [less](https://linuxcommand.org/lc3_man_pages/less1.html): view text files
+* [file](https://linuxcommand.org/lc3_man_pages/file1.html): classify a file;s contents
+
+![doc-ls](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/ls-doc.png)
+
+## Manipuling Files
+* [cp](https://linuxcommand.org/lc3_man_pages/cp1.html): copy files and directories
+* [mv](https://linuxcommand.org/lc3_man_pages/mv1.html): move or rename files and directories
+* [rm](https://linuxcommand.org/lc3_man_pages/rm1.html): remove files and directories
+* [mkdir](https://linuxcommand.org/lc3_man_pages/mkdir1.html)
+
+
+#### how use `cp`
+![cpwildcards](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp1.png)
+![cpwildcards2](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp2.png)
+![cpwildcard](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp3.png)
+
+#### Output
+![cp-practice](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/cp-practice.png)
+
+
+
+
