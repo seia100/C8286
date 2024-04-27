@@ -21,3 +21,17 @@ en este caso el comando del que se esta usando es para calcular el uso del espac
   * `$HOME ` variable de entorno que ocntiene la rutal al directorio principal del usuario.
   * 
 
+![du](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/Screenshot%20from%202024-04-26%2021-44-47.png)
+
+## Navigation
+
+* `pwd` print working directory
+* `cd` change directory
+* `ls` lsit diles and directories
+
+![pwd_ls](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/pwd-ls.png)
+![cd-ls-a](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/usr-ls-a.png)
+
+* notar que hago uso de `ls -a`. La opcion _a_ me permite visualizar los archivos que son "." o ".."
+
+
