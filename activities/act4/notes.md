@@ -79,7 +79,7 @@ a menos que la implemntacion en cypthon mejora, pero tien un costo.
 el problema del cruce entre la cpu y el gil que es ejecutar muchos procesos a la vez y por eso hay ese cruce.
 
 si quiero codigo de alto rendimiento a nivel subprocesos pyhton no sea lo mejor. Por lo que sale una solucion y tiene caracteristicas dianmicas `Cpython`
-pero si quiero eficiencia se rpograma en `C ` o `rast ` y `cython` una extension de c en python. o [Numba](http://numba.pydata.org/)
+pero si quiero eficiencia se rpograma en `C ` o `rast ` y `cython` una extension de c en python. o [Numba](http://numba.pydata.org/){:target="_blank"}
 
 Escribimos solo la parte paralela en otro lenguaje y luego subirlo a python con un nivel de granularidad
 no se hace con multithreding sino con multiprocesamiento.
@@ -100,4 +100,10 @@ con los subprocesos todos con los tipos de objetos se puede compartir y antes se
 si estamos trabajando ocn primitivas y eso eso esta bn para procsamiento para grano grueso: baja comunicacion.
 
 pickle y multiprocessing se llevan bien
+
+### falta explicacion
+
+un pool se crea cada vez que se necesita una funcion map reduce y el precio que estamos pagando es cuando creamos un pool
+
+
 
