@@ -86,3 +86,18 @@ no se hace con multithreding sino con multiprocesamiento.
 
 procesamoento para hacer paralelismo y si tener toda la potencia de la cpu.
 
+#### marshal, dill, pickle
+si queremos velocidad usar marshal caso contrario pickle
+
+no es posible transmitir lanmdas con pickle lo que hacemos es implementar nuestro propio protocolo
+
+####lamndas
+no se puede usar entre procesos con pickle por eso necesitamos reescribir un 
+
+sokcets
+
+con los subprocesos todos con los tipos de objetos se puede compartir y antes se debe comprobar si son seguros de transmitir.
+si estamos trabajando ocn primitivas y eso eso esta bn para procsamiento para grano grueso: baja comunicacion.
+
+pickle y multiprocessing se llevan bien
+
