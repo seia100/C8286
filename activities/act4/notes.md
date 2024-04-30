@@ -113,4 +113,6 @@ ahora si hacemos con list
 
 list(map(fun, data)) //sera que es similar a esto lo de eager?
 
+## mp_mpareduce2.py
 
+Pool.map.async es importante sol informa al final de la funcion y no es sufi 
