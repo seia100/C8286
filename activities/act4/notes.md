@@ -91,7 +91,7 @@ si queremos velocidad usar marshal caso contrario pickle
 
 no es posible transmitir lanmdas con pickle lo que hacemos es implementar nuestro propio protocolo
 
-####lamndas
+#### lamndas
 no se puede usar entre procesos con pickle por eso necesitamos reescribir un 
 
 sokcets
@@ -105,5 +105,12 @@ pickle y multiprocessing se llevan bien
 
 un pool se crea cada vez que se necesita una funcion map reduce y el precio que estamos pagando es cuando creamos un pool
 
+-> **eager and lazy**
+la semantica de Pool.map(fun, data) //Eager: 
+map(fun, data) // Lazy : regresa y no se ejecuta
+
+ahora si hacemos con list
+
+list(map(fun, data)) //sera que es similar a esto lo de eager?
 
 
