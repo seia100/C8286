@@ -116,3 +116,16 @@ list(map(fun, data)) //sera que es similar a esto lo de eager?
 ## mp_mpareduce2.py
 
 Pool.map.async es importante sol informa al final de la funcion y no es sufi 
+
+```
+map_results = [ret.get() for ret in map_returns]
+```
+
+no hay caoss generales y ejemplos de casos mas grandes y no se puede consumir tiempo y recursos :D
+
+tener en cuenta de cerrar el pool
+``pool(close())``
+
+practicar [vim adventures](https://vim-adventures.com/)
+
+adicional a ello plugins 
