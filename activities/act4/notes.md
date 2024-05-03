@@ -129,3 +129,44 @@ tener en cuenta de cerrar el pool
 practicar [vim adventures](https://vim-adventures.com/)
 
 adicional a ello plugins 
+
+
+____________________________-
+class 2024/03/05 
+
+los lambdas tienen un problema es que no se puede conservar con pickle
+la funcion de counter no se peude transferir como subproceso como tal.
+```python
+def counter(emitted):
+    return emitted[0], sum(emitted[1])
+
+```
+
+cunado pasan problemas con el intercambio de datos.
+no es posible transferir lanmbas mediante pickle. Y si este no puede manejar, entonces yo, como programmer, me tengo que encargar. Por lo que nos vamos a encargar de manera externa como solucion
+
+cuando tengo muchos dtos por transferir puede anular por completo el multriprocesamiento. Por lo que tenemos que evitar el gil y demas.
+con lo de future perdemos el control para controlar y er lo que pasa de manera interan. Para ello es tener politicas para ver el rendimineto y funcionalidad.
+
+
+tener en cueta la informacion relacionado con [os.sched_getaffinity()](https://www.geeksforgeeks.org/python-os-sched_getaffinity-method/)
+
+puede ser 
+
+Lo que buscamos es potenciacion [asyc_map](jejje.com) donde esta la diferencia entre map redice1 y map_reduceee.
+Su sistema de callback solo informa al final de la funcion
+por lo que la funcion2 soluciona ese tipo de problemas. Porlo que tenemossssss un seguimiento de trabajo :D
+
+porque se importante hacer un seguimiento de progreso: 
+  vamos a ver lo que nos hace ver la lineas que me hace ver ese seguimiento para revisar esa lineas :D
+
+Demasiada entrada y salida peude destruir la maquina
+
+Si los procesos consumen muchas memoria ya que se reduce el rendimiento.
+compromiso excesivo
+y el sobreocmrpomiso con el uso de los procesos de CPU o cuando se usa los _burst_ rafagas.
+
+lo que hacemos es **FRAGMENTACION**
+  lo que ahce lo de chunked_async_map lo que hace es llamar lo de los pools y luego fragmenta con lo demas 
+
+lecturas: [three pieces operatives systems](https://pages.cs.wisc.edu/~remzi/OSTEP/)
