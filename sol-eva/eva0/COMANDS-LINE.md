@@ -90,6 +90,27 @@ En caso que haya mas de una version de- un programa ejecutable instalado en un s
 
 Por ejemplo en las siguientes lineas de codigo nos proporciona informacion de algunos comando de los directorios como tal.
 
-`[type_which](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/type-wich.png)
+`![type_which](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/type-wich.png)
+
+NOTE:
+ ______
+ tener en cuenta que los enlaces estos son importante para cuando tengamos configuracion d eentrada y salida. Incluso ubicar filtros
+ [I/O Redirection](https://linuxcommand.org/lc3_lts0070.php)
+
+ Ademas es importate que cuado tengo ejecutables sepamos modificar con eficiencia los permisos.
+## Permissions -> [Link](https://linuxcommand.org/lc3_lts0090.php) 
+
+* chmod - modify file access rights
+* su - temporarily become the superuser
+* sudo - temporarily become the superuser
+* chown - change file ownership
+* chgrp - change a file's group ownership
 
 
+## Job Control -> [Link](https://linuxcommand.org/lc3_lts0100.php)
+* ps - list the processes running on the system
+* kill - send a signal to one or more processes (usually to "kill" a process)
+* jobs - an alternate way of listing your own processes
+* bg - put a process in the background
+* fg - put a process in the foreground
+ 
