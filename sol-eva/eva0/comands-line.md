@@ -41,6 +41,13 @@ en este caso el comando del que se esta usando es para calcular el uso del espac
 
 ![doc-ls](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/ls-doc.png)
 
+
+
+#### Important
+*tener en consideracion los siguientes accesos o informacion del sistema mediante directorios de configuracion del sistema. 
+[important directories](https://linuxcommand.org/lc3_lts0040.php)
+________________________---
+
 ## Manipuling Files
 * [cp](https://linuxcommand.org/lc3_man_pages/cp1.html): copy files and directories
 * [mv](https://linuxcommand.org/lc3_man_pages/mv1.html): move or rename files and directories
@@ -57,6 +64,32 @@ en este caso el comando del que se esta usando es para calcular el uso del espac
 ### mv
 comando para mover de un direcotrio/archivo a otro un directorio/archivo.
 
+![move_directory](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/mv_move.png)
 
+En este caso ``..`` son para referirse al directorio anterior de modo que ya no se copia todo el _path_ del directorio anterior. En caso que se quiera renombrar un archivo no es necesario escribir el path solo el nombre es decir _mv [before_name_file] [new_name_file]_ 
+
+### rm
+The rm command removes (deletes) files and directories.
+* Algunas opciones
+ * `-i` para confirmar el archivo o file a eliminar.
+ * `-r` eliminar un directorio de manera recursiva. Es decir todos los directorios que estan anidados en el directorio por eliminar.
+ 
+![rm_reursive](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/rm_recursive.png)
+
+## Working with commands
+* [type](https://linuxcommand.org/lc3_man_pages/typeh.html) Display information about command type
+* [which](https://linuxcommand.org/lc3_man_pages/which1.html) Locate a command
+* [help](https://linuxcommand.org/lc3_man_pages/helph.html) Display referencce page for shell builtin
+* [man](https://linuxcommand.org/lc3_man_pages/man1.html) Display an on-line command reference
+
+### type
+muestra el tipo de comando que ejecutara el shell.
+
+### which
+En caso que haya mas de una version de- un programa ejecutable instalado en un sistema. Es decir, para determinar la ubicación exacta de un determinado ejecutable.
+
+Por ejemplo en las siguientes lineas de codigo nos proporciona informacion de algunos comando de los directorios como tal.
+
+`[type_which](https://github.com/seia100/C8286/blob/main/sol-eva/eva0/type-wich.png)
 
 
