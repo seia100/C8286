@@ -98,3 +98,4 @@ if __name__ == '__main__':
 
 ```
 ### output
+![sum_squares_map_Reduce](https://github.com/seia100/C8286/blob/main/activities/act6/Captura%20desde%202024-05-07%2011-04-22.png)
