@@ -1,5 +1,5 @@
 # C8286
-prácticas de código relacionados al curso parallel and  distributed  computing
+prácticas de código relacionados al curso _parallel and  distributed  computing_.
 
 
 Indice de la semana 4
