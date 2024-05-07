@@ -1,7 +1,7 @@
 ### Ejercicio 20: Programcion funcoinal con map y redicec para el procesamiento distribuido
 Utiliza las funciones map y redice de la biblioteca functools para encontrar la suma de los cuadrados de una lista de numeros distribuida entre varios procesos
 
-* el codigo comandando esta [cod](https://github.com/seia100/C8286/blob/main/activities/act6/ejc20.py)
+* Abrir el [cod](https://github.com/seia100/C8286/blob/main/activities/act6/ejc20.py) arjunto en el archivo python.
 
 ```python
 from collections import defaultdict
