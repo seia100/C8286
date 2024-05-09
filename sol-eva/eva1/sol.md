@@ -44,4 +44,5 @@ ps -eo stat, pid, cmd | grep "^Z" | while read stat pid cmd; do
 done
 
 ```
+## Reiniciar automaticamente un servicio qu eno esta corriendo
 
