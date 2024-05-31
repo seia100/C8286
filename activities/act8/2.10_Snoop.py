@@ -13,9 +13,9 @@ import threading
 import time
 
 # Inicializa una memoria compartida simulada y una lista de operaciones sobre el bus.
-shared_memory = [0] * 10
-bus_operations = []
-bus_lock = threading.Lock()  # Mutex para controlar el acceso a las operaciones del bus.
+shared_memory = [0] * 10 #  simula la memoria compartida
+bus_operations = [] # registran operaciones de lectura y escritura que ocurren en el bus.
+bus_lock = threading.Lock()  # Mutex evitando condiciones de carrera. 
 
 class Cache:
     def __init__(self, id):
@@ -36,8 +36,9 @@ class Cache:
 
     def snoop(self):
         # Proceso continuo que verifica las operaciones del bus para mantener la coherencia de caché.
+        # se basa operaciones en otros nucleos
         while True:
-            with bus_lock:
+            with bus_lock: # bus_lock previene que múltiples hilos modifiquen bus_operations
                 if bus_operations:
                     op = bus_operations.pop(0)  # Extrae la operación más antigua del bus.
                     if op[1] == 'write':
