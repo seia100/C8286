@@ -1,11 +1,12 @@
 # Técnicas de balanaceo de carga
 
 #### Ejercicio 5
+Estudia la latencia y el ancho de banda en sistemas distribuidos y cómo influyen en la eficiencia del paralelismo.
+
 * Tener en cuenta las siguientes fuentes de codigo
 * [Latency and Throughput in System Design](https://www.geeksforgeeks.org/latency-in-system-design/)
 * [Low Latency: The High-Speed Adventure in Distributed Systems](https://medium.com/@mayankkumar1205/low-latency-the-high-speed-adventure-in-distributed-systems-bd2d6a1f2c8d)
 
-EStudiar la latendcia y el ancho de banda en sistemas distribuidos y cómo influyen en la eficiencia del paralelismo.
 
 ##### Tareas
 * Implementar un algoritmo de comunicación punto a punto( por ejemplo, intercambio de mensajes) utilizando MPI
