@@ -1,1 +1,1 @@
-// code in c
+## codigo fuente y scripst del sprint 1
