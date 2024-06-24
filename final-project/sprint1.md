@@ -1,7 +1,7 @@
 # Diseño e implementación básica del IDS
 
 ## Definir los requisitos del IDS:
-* Identificar los tios de intrusiones que el sistema debe detectar.
+* Identificar los tipos de intrusiones que el sistema debe detectar.
 * Detectar los umbrales de alerta u los criterios de análisis.
 * Establecer los requisitos de rendimiento y disponibilidad.
 
