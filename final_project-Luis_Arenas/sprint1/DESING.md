@@ -103,53 +103,76 @@ El sistema se dividirá en los siguientes microservicios:
 #### 2.2.1 Capturador de Paquetes (Packet Capture Service)
 
 **Responsabilidades**:
-- Captura de tráfico de red en tiempo real.
+- Captura de tráfico de red en tiempo real utilizando técnicas de bypass de kernel.
 - Filtrado inicial de paquetes basado en reglas predefinidas.
-- Preprocesamiento de paquetes para su análisis posterior.
+   - Basado en BPF (Berkeley Packet Filter).
+     
+- Preprocesamiento y normalizacion de paquetes para su análisis posterior.
 
 **Tecnologías**:
 - Python con la biblioteca Scapy para la captura de paquetes.
 - ZeroMQ para la transmisión eficiente de paquetes capturados al Analizador de Datos.
+- eBPF para filtrado y clasificación de paquetes a nivel de kernel.
+- Apache Flink para procesamiento de streams de datos en tiempo real.
 
 **Escalabilidad**:
 - Despliegue en múltiples nodos de red para una cobertura completa.
+   - Implementación de procesamiento distribuido mediante técnicas de sharding basadas en hash de flujos.
 - Balanceo de carga entre instancias para manejar alto volumen de tráfico.
+   - Utilización de NUMA-aware computing para optimización de rendimiento en sistemas multi-core.
+   - Utulización de Kubernets para la optimización del escalado y gestión de los servicios y/o servidores.
 
 #### 2.2.2 Analizador de Datos (Data Analysis Service)
 
 **Responsabilidades**:
 - Análisis en tiempo real de los paquetes capturados.
 - Aplicación de algoritmos de detección de intrusiones.
+   - Correlación de eventos multi-fuente para detección de amenazas avanzadas persistentes (APT). 
 - Generación de alertas basadas en los umbrales definidos.
+   - Análisis heurístico y modelos de machine learning. Dado la complejidad de la implementacion se considera en mejoras del proyecto (opcional).
 
 **Tecnologías**:
 - Python con bibliotecas como NumPy y Pandas para análisis de datos.
-- TensorFlow o PyTorch para modelos de machine learning avanzados.
+- TensorFlow o PyTorch para modelos de _machine & deep learning_ avanzados.
 - Apache Kafka para el procesamiento de streams de datos en tiempo real.
+- Apache Spark para procesamiento distribuido de datos a gran escala.
+- Drools para implementación de motores de reglas complejas (opcional)
 
 **Escalabilidad**:
 - Implementación de procesamiento distribuido utilizando Apache Spark.
+   - Implementación de técnicas de procesamiento paralelo y distribución de carga basada en _consistent hashing_.
 - Uso de técnicas de paralelismo para optimizar el rendimiento.
+   - Utilización de GPU clustering para aceleración de algoritmos de machine learning.
 
 #### 2.2.3 Gestor de Alertas (Alert Manager Service)
 
 **Responsabilidades**:
 - Recepción y procesamiento de alertas generadas por el Analizador de Datos.
+   - Para reducción de falsos positivos.
 - Correlación de alertas para identificar patrones de ataque complejos.
+   - Implementación de workflows de respuesta automatizada a incidentes.
 - Notificación a los administradores a través de diversos canales (email, SMS, etc.).
+   - Notificación multi-canal con soporte para escalamiento y SLAs.
 
-**Tecnologías**:
+**Tecnologías**: (consideraciones)
 - Node.js para un manejo eficiente de operaciones asíncronas.
-- RabbitMQ para la gestión de colas de mensajes de alertas.
+- RabbitMQ para la gestión de colas de mensajes de alertas, considero más accesible para implementar. 
+   - Apache Kafka para implementación de arquitectura de mensajería distribuida. Ademas estrategisas como lo es MPI, _Actor Model_, Cola de mensajes
+   - Relacion con la información: [Message Queue](https://medium.com/@rcougil/software-colas-de-mensajes-qu%C3%A9-son-y-para-qu%C3%A9-sirven-1a1d8e7f63f3)
+- Rundeck para orquestación de tareas de respuesta a incidentes.
+   - Es importante mencionar e implementar técnicas de [SOAR](https://www.ibm.com/es-es/topics/security-orchestration-automation-response) o también se puede consultar el siguiente _link_: [Security Orchestration, Automation and Response](https://ciberseguridadmax.com/soar/)
 
 **Escalabilidad**:
 - Implementación de un sistema de colas distribuido para manejar picos de alertas.
+- Utilización de técnicas de caching distribuido para optimización de consultas frecuentes.
 
 #### 2.2.4 Base de Datos (Database Service)
+Servicio de Persistencia y Consulta de Datos (DPQS)
 
 **Responsabilidades**:
 - Almacenamiento persistente de logs, alertas y configuraciones.
 - Gestión de consultas para análisis históricos y generación de informes.
+- Soporte para consultas complejas y análisis forense (opcional)
 
 **Tecnologías**:
 - MongoDB para almacenamiento de datos no estructurados (logs y alertas).
@@ -157,10 +180,12 @@ El sistema se dividirá en los siguientes microservicios:
 - Redis para caché y almacenamiento en memoria de datos frecuentemente accedidos.
 
 **Escalabilidad**:
-- Implementación de sharding en MongoDB para distribución de datos.
+- Implementación de sharding en MongoDB para distribución de datos en rangos temporales para distribucion eficiente de datos.
 - Replicación de bases de datos para alta disponibilidad y rendimiento de lectura.
+   - Utilización de técnicas de compresión avanzada y tiering de almacenamiento.
 
 #### 2.2.5 Interfaz de Usuario (UI Service)
+Servicio de Interfaz de Usuario y Visualización (UIVS)
 
 **Responsabilidades**:
 - Presentación de dashboards y visualizaciones de alertas y estadísticas.
@@ -168,35 +193,46 @@ El sistema se dividirá en los siguientes microservicios:
 - Visualización de logs y herramientas de búsqueda avanzada.
 
 **Tecnologías**:
-- React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive.
-- GraphQL para una API flexible que permita consultas eficientes desde el frontend.
+- React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado (tratare de interactuar con estas tecnologías). Caso contrario usaré herremientas como lo es Dart(Flutter).
+- D3.js y WebGL para visualizaciones de datos de alto rendimiento.
+- GraphQL ocn Apollo para una API flexible que permita consultas eficientes desde el frontend.
 
 **Escalabilidad**:
 - Implementación de server-side rendering para mejorar el rendimiento.
-- Uso de CDN para distribución global de assets estáticos.
+   - Implementación de técnicas de Code Splitting y Lazy Loading para optimización de carga.
+- Uso de [CDN](https://aws.amazon.com/es/what-is/cdn/) para distribución global de assets estáticos. Es decir, la autilizacion de [_Edge Computing_](https://www.ibm.com/es-es/topics/edge-computing) para la distribucion global de contenido estático y dinámico nos permite ver diferentes directrices de desarrollo.
+
 
 #### 2.2.6 Servicio de Autenticación (Authentication Service)
+Servicio de Autenticación y Control de Acceso (AACS)
 
 **Responsabilidades**:
-- Gestión de autenticación y autorización de usuarios.
+- Gestión de autenticación y autorización de usuarios basada en roles (RBAC) y atributos (ABAC)
 - Implementación de single sign-on (SSO) y multi-factor authentication (MFA).
 
 **Tecnologías**:
 - OAuth 2.0 y OpenID Connect para autenticación segura.
+- Keycloak para gestión centralizada de identidad y acceso.
 - JWT (JSON Web Tokens) para manejo de sesiones.
+- LDAP y Active Directory para integración con directorios corporativos.
 
 **Escalabilidad**:
 - Uso de servicios de directorio distribuidos para almacenamiento de credenciales.
-
+   - Caching distribuido de tokens y sesiones.
+- 
 #### 2.2.7 Servicio de Configuración (Configuration Service)
+Servicio de Gestión de Configuración y Políticas (CPMS)
 
 **Responsabilidades**:
-- Gestión centralizada de configuraciones para todos los microservicios.
+- Gestión centralizada de configuraciones y politicas de seguridad para todos los microservicios.
 - Actualizaciones dinámicas de configuración sin necesidad de reiniciar servicios.
+   - Versionado y rollback de configuraciones.
+- 
 
 **Tecnologías**:
-- Spring Cloud Config para gestión centralizada de configuraciones.
-- ZooKeeper para coordinación distribuida y gestión de configuraciones dinámicas.
+- [_Spring Cloud Config_](https://spring.io/projects/spring-cloud-config) para gestión centralizada de configuraciones.
+- [ZooKeeper](https://www.geeksforgeeks.org/what-is-apache-zookeeper/) para coordinación distribuida y gestión de configuraciones dinámicas. También considerar [Consul] 
+- [etcd](https://www.ibm.com/topics/etcd) para almacenamiento distribuido de configuraciones.
 
 **Escalabilidad**:
 - Replicación de configuraciones en múltiples nodos para alta disponibilidad.
@@ -233,16 +269,21 @@ El sistema se dividirá en los siguientes microservicios:
 
 5. **WebSocket**:
    - Implementado en la Interfaz de Usuario para actualizaciones en tiempo real de alertas y estadísticas.
+      - Utilizado por UIVS para actualizaciones en tiempo real de alertas y métricas. 
 
 6. **GraphQL**:
    - Utilizado por la Interfaz de Usuario para realizar consultas flexibles a los datos almacenados.
+      - UIVS para realizar queries flexibles a DPQS.
+   - Implementación de Federation para composición de schemas distribuidos.
 
 ### 2.4 Seguridad en la Comunicación
 
 - Implementación de TLS/SSL para todas las comunicaciones entre microservicios.
-- Uso de mTLS (mutual TLS) para autenticación mutua entre servicios.
+- Uso de mTLS (mutual TLS) para autenticación y encriptación mutua entre servicios.
 - Implementación de API Gateway para centralizar la autenticación y autorización.
+   - Ttécnicas de ofuscación y tokenización para datos sensibles en tránsito y reposo.
 - Rotación regular de claves y certificados.
+   - Uso de protocolos como ACME
 
 ### 2.5 Monitoreo y Observabilidad
 
