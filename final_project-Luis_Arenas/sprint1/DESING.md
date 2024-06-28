@@ -19,6 +19,7 @@ El sistema debe ser capaz de detectar los siguientes tipos de intrusiones:
 
 Para cada tipo de intrusión, se establecerán los siguientes umbrales y criterios:
 
+#### Umbrales y criterios obligatorios🔒:
 1. **Ataques de Fuerza Bruta**:
    - Umbral: Más de 5 intentos fallidos de autenticación en 1 minuto.
    - Criterio: Monitoreo de logs de autenticación y análisis de patrones de intentos fallidos.
@@ -34,6 +35,7 @@ Para cada tipo de intrusión, se establecerán los siguientes umbrales y criteri
    - Criterio: Análisis de payload de solicitudes HTTP utilizando expresiones regulares.
    - Metodología: Análisis léxico y sintáctico de payloads HTTP utilizando árboles de parsing.
 
+#### Umbrales a realizarse posteriormente 🔓:
 4. **Cross-Site Scripting (XSS)**:
    - Umbral: Detección de 2 o más intentos de inyección de scripts en 5 minutos.
    - Criterio: Análisis de parámetros de solicitudes HTTP y respuestas del servidor.
