@@ -210,8 +210,9 @@ Servicio de Interfaz de Usuario y Visualización (UIVS)
 
 **Tecnologías**:
 - React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado (tratare de interactuar con estas tecnologías). Caso contrario usaré herremientas como lo es Dart(Flutter).
+- Nginx como servidor web dentro del contenedor
 - D3.js y WebGL para visualizaciones de datos de alto rendimiento.
-- GraphQL ocn Apollo para una API flexible que permita consultas eficientes desde el frontend.
+- GraphQL y Apollo para una API flexible que permita consultas eficientes desde el frontend. Estos estaran contenerizados.
 
 **Escalabilidad**:
 - Implementación de server-side rendering para mejorar el rendimiento.
@@ -227,15 +228,20 @@ Servicio de Autenticación y Control de Acceso (AACS)
 - Implementación de single sign-on (SSO) y multi-factor authentication (MFA).
 
 **Tecnologías**:
-- OAuth 2.0 y OpenID Connect para autenticación segura.
+- Contenedor Docker con implementación de OAuth 2.0 y OpenID Connect
 - Keycloak para gestión centralizada de identidad y acceso.
-- JWT (JSON Web Tokens) para manejo de sesiones.
+   - Keycloak desplegado como StatefulSet en Kubernetes
 - LDAP y Active Directory para integración con directorios corporativos.
+   - Uso de ExternalName Service para integración con LDAP/Active Directory externos
 
 **Escalabilidad**:
+
 - Uso de servicios de directorio distribuidos para almacenamiento de credenciales.
    - Caching distribuido de tokens y sesiones.
-- 
+   - Configuración de secretos para almacenamiento seguro de credenciales
+- Implementación de Network Policies para restringir acceso al servicio
+- Uso de PodDisruptionBudget para garantizar alta disponibilidad
+  
 #### 2.2.7 Servicio de Configuración (Configuration Service)
 Servicio de Gestión de Configuración y Políticas (CPMS)
 
@@ -247,12 +253,14 @@ Servicio de Gestión de Configuración y Políticas (CPMS)
 
 **Tecnologías**:
 - [_Spring Cloud Config_](https://spring.io/projects/spring-cloud-config) para gestión centralizada de configuraciones.
-- [ZooKeeper](https://www.geeksforgeeks.org/what-is-apache-zookeeper/) para coordinación distribuida y gestión de configuraciones dinámicas. También considerar [Consul] 
+- [ZooKeeper](https://www.geeksforgeeks.org/what-is-apache-zookeeper/) para coordinación distribuida y gestión de configuraciones dinámicas. 
 - [etcd](https://www.ibm.com/topics/etcd) para almacenamiento distribuido de configuraciones.
+   - Desplegar etcd como un StatefulSet en Kubernetes para el almacenamiento distribuido de configuraciones. 
 
 **Escalabilidad**:
-- Replicación de configuraciones en múltiples nodos para alta disponibilidad.
-
+- Configurar la replicación de configuraciones en múltiples nodos usando Spring Cloud Config, ZooKeeper y etcd para asegurar alta disponibilidad.
+- Desplegar los servicios como Deployment con múltiples réplicas para mejorar la resiliencia y capacidad de manejo de carga.
+  
 #### 2.2.8 Servicio de Logs (Logging Service)
 
 **Responsabilidades**:
@@ -260,11 +268,16 @@ Servicio de Gestión de Configuración y Políticas (CPMS)
 - Indexación y búsqueda eficiente de logs para análisis y debugging.
 
 **Tecnologías**:
-- ELK Stack (Elasticsearch, Logstash, Kibana) para gestión y visualización de logs.
-- Fluentd para recolección y forwarding de logs.
+- ELK Stack (Elasticsearch, Logstash, Kibana) para gestión y visualización de logs. Éste debe ser deplegado en Kubernets
+- Fluentd como DaemonSet para recolección y forwarding de logs.
 
 **Escalabilidad**:
 - Clusterización de Elasticsearch para manejo de grandes volúmenes de logs.
+- Elasticsearch desplegado como StatefulSet con configuración de cluster.
+   - Configuración de recursos y límites para optimizar rendimiento del cluster ELK
+- Kibana desplegado como Deployment con Ingress para acceso externo
+- Uso de StorageClass para provisión dinámica de almacenamiento para Elasticsearch
+
 
 ### 2.3 Interfaces y Protocolos de Comunicación entre Microservicios
 
@@ -307,6 +320,16 @@ Servicio de Gestión de Configuración y Políticas (CPMS)
 - Uso de Grafana para la visualización de métricas y creación de dashboards.
 - Implementación de tracing distribuido con Jaeger para seguimiento de transacciones a través de múltiples servicios.
 - Alertas automáticas basadas en umbrales de rendimiento y disponibilidad.
+
+### 2.6 Consideraciones Generales de Kubertenes
+
+- Uso de Namespaces para separar entornos (desarrollo, staging, producción)
+- Implementación de Network Policies para seguridad entre servicios
+- Configuración de ResourceQuotas para limitar recursos por Namespace
+- Uso de PriorityClasses para asegurar QoS en servicios críticos
+- Implementación de Helm Charts para facilitar el despliegue y actualizaciones
+- Configuración de Prometheus y Grafana para monitoreo del cluster y aplicaciones
+- Uso de Istio como service mesh para gestión avanzada de tráfico y seguridad (opcional)
 
 ## Conclusión
 
