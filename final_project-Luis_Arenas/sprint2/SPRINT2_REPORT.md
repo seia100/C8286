@@ -142,7 +142,7 @@ kubectl get hpa
 ```
 
 ### Flujo
-![image](https://github.com/seia100/c8286)
+![image]([https://github.com/seia100/c8286](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint2/assets/flujograma-algoritmos.png))
 
 - Containerización con Docker:
 Cada componente del sistema (captura de datos, análisis, etc.) ahora se ejecuta en contenedores Docker, lo que proporciona consistencia y portabilidad.
@@ -180,6 +180,8 @@ Kubernetes proporciona características como auto-healing y load balancing, mejo
 - Escalabilidad Automática:
 Los Horizontal Pod Autoscalers permiten que el sistema se adapte automáticamente a las variaciones en la carga de trabajo.
 
+## Resultados esperados
+![resultados esperados](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint2/assets/Screenshot%202024-06-28%20160330.png)
 
 ## Conclusión
 Las mejoras implementadas en este sprint representan un avance significativo en la capacidad del sistema para detectar y responder a amenazas de seguridad. La combinación de procesamiento asíncrono, análisis distribuido con machine learning y comunicación eficiente entre microservicios sienta las bases para un sistema de detección de intrusiones más robusto, escalable y adaptable a nuevas amenazas.
