@@ -30,4 +30,7 @@ Dada la nanturaleza del proyecto se ha empleado tecnicas que no requiere una con
 
   * Utilizar un gestor de secretos para almacenar las credenciales de acceso a la base de datos MongoDB, evitando hardcodearlas en el código.
 
-  * 
+
+ ## Issues
+* Tengo algunos avances de la interfaz de usuario por lo que es molesto notar que hay algunos problemas al momennto de ejecutar por lo que se tratara de solucionar ya sea usando dart o flutter.
+
