@@ -112,17 +112,17 @@ El sistema se dividirá en los siguientes microservicios:
 - Preprocesamiento y normalizacion de paquetes para su análisis posterior.
 
 **Tecnologías**:
-- Python con la biblioteca Scapy para la captura de paquetes.
-- ZeroMQ para la transmisión eficiente de paquetes capturados al Analizador de Datos.
-- eBPF para filtrado y clasificación de paquetes a nivel de kernel.
-- Apache Flink para procesamiento de streams de datos en tiempo real.
+- Contenedor Docker basado en imagen de Python con Scapy instalado
+- ZeroMQ para la transmisión eficiente de paquetes.
+- eBPF compilado dentro del contenedor para filtrado a nivel de kernel
+- Apache Flink desplegado como Job en Kubernetes
 
 **Escalabilidad**:
-- Despliegue en múltiples nodos de red para una cobertura completa.
-   - Implementación de procesamiento distribuido mediante técnicas de sharding basadas en hash de flujos.
-- Balanceo de carga entre instancias para manejar alto volumen de tráfico.
-   - Utilización de NUMA-aware computing para optimización de rendimiento en sistemas multi-core.
-   - Utulización de Kubernets para la optimización del escalado y gestión de los servicios y/o servidores.
+- Utilizar DaemonSets y nodeSelector para asegurar que las instancias de la aplicación estén desplegadas en nodos con las capacidades necesarias.
+-  Configurar securityContext y asignar recursos optimizados (CPU/memoria) para aplicaciones de alto rendimiento en captura de paquetes (opcional).
+-   Implementar técnicas de sharding y balanceo de carga para manejar grandes volúmenes de datos de manera distribuida y eficiente.
+-   Aplicar NUMA-aware computing para mejorar el rendimiento en sistemas multi-core.
+-   Utilizar Kubernetes para gestionar el escalado y la administración de la infraestructura de manera eficiente.
 
 #### 2.2.2 Analizador de Datos (Data Analysis Service)
 
@@ -136,15 +136,18 @@ El sistema se dividirá en los siguientes microservicios:
 **Tecnologías**:
 - Python con bibliotecas como NumPy y Pandas para análisis de datos.
 - TensorFlow o PyTorch para modelos de _machine & deep learning_ avanzados.
-- Apache Kafka para el procesamiento de streams de datos en tiempo real.
+- Apache Kafka desplegado como StatefulSet en Kubernetes.
 - Apache Spark para procesamiento distribuido de datos a gran escala.
-- Drools para implementación de motores de reglas complejas (opcional)
+   - Apache Spark configurado como Spark-on-Kubernetes
 
 **Escalabilidad**:
-- Implementación de procesamiento distribuido utilizando Apache Spark.
-   - Implementación de técnicas de procesamiento paralelo y distribución de carga basada en _consistent hashing_.
-- Uso de técnicas de paralelismo para optimizar el rendimiento.
-   - Utilización de GPU clustering para aceleración de algoritmos de machine learning.
+- Utilizar un Deployment con HorizontalPodAutoscaler para desplegar la aplicación principal, asegurando que escale automáticamente según la demanda.
+- Utilizar PersistentVolumeClaims para garantizar el almacenamiento persistente de modelos y datos temporales.
+- Implementar NodeAffinity para desplegar pods que requieren GPU en nodos específicos con capacidades de GPU.
+- Utilizar Apache Spark para manejar el procesamiento distribuido de datos, aplicando técnicas de _consistent hashing_ para una distribución equitativa de la carga.
+   - Aplicar técnicas de paralelismo dentro de Spark para optimizar el rendimiento de las tareas de procesamiento de datos.
+   - Configurar los entornos de ejecución de Spark para aprovechar las capacidades de GPU cuando sea relevante para las tareas de machine learning.
+
 
 #### 2.2.3 Gestor de Alertas (Alert Manager Service)
 
@@ -157,16 +160,21 @@ El sistema se dividirá en los siguientes microservicios:
    - Notificación multi-canal con soporte para escalamiento y SLAs.
 
 **Tecnologías**: (consideraciones)
-- Node.js para un manejo eficiente de operaciones asíncronas.
+- Contenedor Docker basado en Node.js
 - RabbitMQ para la gestión de colas de mensajes de alertas, considero más accesible para implementar. 
-   - Apache Kafka para implementación de arquitectura de mensajería distribuida. Ademas estrategisas como lo es MPI, _Actor Model_, Cola de mensajes
+   - Apache Kafka para implementación de arquitectura de mensajería distribuida. Ademas estrategisas como lo es MPI, _Actor Model_, Cola de mensajes.
    - Relacion con la información: [Message Queue](https://medium.com/@rcougil/software-colas-de-mensajes-qu%C3%A9-son-y-para-qu%C3%A9-sirven-1a1d8e7f63f3)
+   - RabbitMQ desplegado como StatefulSet en Kubernetes.
 - Rundeck para orquestación de tareas de respuesta a incidentes.
    - Es importante mencionar e implementar técnicas de [SOAR](https://www.ibm.com/es-es/topics/security-orchestration-automation-response) o también se puede consultar el siguiente _link_: [Security Orchestration, Automation and Response](https://ciberseguridadmax.com/soar/)
 
 **Escalabilidad**:
-- Implementación de un sistema de colas distribuido para manejar picos de alertas.
-- Utilización de técnicas de caching distribuido para optimización de consultas frecuentes.
+- Implementar un sistema de colas distribuido (por ejemplo, Apache Kafka o RabbitMQ) para gestionar picos de tráfico y alertas.
+- Desplegar la aplicación como un Deployment en Kubernetes con la estrategia de RollingUpdate para asegurar actualizaciones sin interrupciones.
+- Configurar readinessProbe y livenessProbe para monitorear la salud de los pods y garantizar que solo los pods saludables manejen tráfico.
+- Utilizar ConfigMaps para gestionar las configuraciones de la aplicación, permitiendo cambios dinámicos y centralizados.
+- Implementar PodDisruptionBudget para asegurar que siempre haya un número mínimo de pods disponibles durante actualizaciones o eventos de mantenimiento.
+
 
 #### 2.2.4 Base de Datos (Database Service)
 Servicio de Persistencia y Consulta de Datos (DPQS)
@@ -178,13 +186,19 @@ Servicio de Persistencia y Consulta de Datos (DPQS)
 
 **Tecnologías**:
 - MongoDB para almacenamiento de datos no estructurados (logs y alertas).
+   - MongoDB desplegado como StatefulSet en Kubernetes 
 - PostgreSQL para datos estructurados (configuraciones y metadatos).
+   - PostgreSQL desplegado como StatefulSet con operador específico
 - Redis para caché y almacenamiento en memoria de datos frecuentemente accedidos.
+   - Redis desplegado como StatefulSet para caché distribuido 
 
 **Escalabilidad**:
-- Implementación de sharding en MongoDB para distribución de datos en rangos temporales para distribucion eficiente de datos.
-- Replicación de bases de datos para alta disponibilidad y rendimiento de lectura.
-   - Utilización de técnicas de compresión avanzada y tiering de almacenamiento.
+- Configurar StorageClass en Kubernetes para proporcionar almacenamiento persistente dinámicamente según las necesidades de los pods.
+- Implementar CronJobs para realizar backups automáticos de los datos críticos, asegurando la recuperación de datos en caso de fallo.
+- Implementar servicios headless para permitir la comunicación directa entre los pods, mejorando la eficiencia.
+- Configurar MongoDB con sharding basado en rangos temporales para distribuir los datos de manera eficiente.
+- Implementar la replicación de bases de datos para asegurar alta disponibilidad y mejorar el rendimiento de lectura.
+- Utilizar técnicas de compresión avanzada y tiering de almacenamiento para optimizar el uso y el rendimiento del almacenamiento.
 
 #### 2.2.5 Interfaz de Usuario (UI Service)
 Servicio de Interfaz de Usuario y Visualización (UIVS)
