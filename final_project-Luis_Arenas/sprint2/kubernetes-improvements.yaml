@@ -1,0 +1,47 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intrusion-detection
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: intrusion-detection
+  template:
+    metadata:
+      labels:
+        app: intrusion-detection
+    spec:
+      containers:
+      - name: intrusion-detection
+        image: intrusion-detection:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        envFrom:
+        - configMapRef:
+            name: intrusion-detection-config
+        - secretRef:
+            name: intrusion-detection-secrets
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: intrusion-detection-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: intrusion-detection
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70
