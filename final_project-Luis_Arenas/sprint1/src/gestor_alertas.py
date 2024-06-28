@@ -20,7 +20,7 @@ def send_email_alert(alert):
     msg['Subject'] = f"DIDS Alert: {alert['type']}"  # El asunto del correo incluye el tipo de alerta.
     
     # Configuramos el remitente y el destinatario del correo electrónico.
-    msg['From'] = "dids@example.com"  # Dirección de correo del remitente.
+    msg['From'] = "luiss.arenast@gmail.com"  # Dirección de correo del remitente.
     msg['To'] = "admin@example.com"  # Dirección de correo del destinatario.
 
     # Creamos una conexión SMTP con el servidor de correo local.
