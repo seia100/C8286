@@ -142,7 +142,7 @@ kubectl get hpa
 ```
 
 ### Flujo
-![image]([https://github.com/seia100/c8286](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint2/assets/flujograma-algoritmos.png))
+![image](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint2/assets/flujograma-algoritmos.png)
 
 - Containerización con Docker:
 Cada componente del sistema (captura de datos, análisis, etc.) ahora se ejecuta en contenedores Docker, lo que proporciona consistencia y portabilidad.
