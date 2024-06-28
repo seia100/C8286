@@ -2,7 +2,7 @@
 
 ## 1. Requisitos del IDS
 
-### 1.1 Tipos de Intrusiones a Detectar
+### 1.1 Tipos de Intrusiones a Detectar 🕵️‍♂️
 
 El sistema debe ser capaz de detectar los siguientes tipos de intrusiones:
 
@@ -15,7 +15,7 @@ El sistema debe ser capaz de detectar los siguientes tipos de intrusiones:
 7. **Exfiltración de Datos**: Identificación de transferencias de datos anormales que puedan indicar fuga de información.
 8. **Man-in-the-Middle (MitM)**: Detección de intentos de interceptación de tráfico.
 
-### 1.2 Umbrales de Alerta y Criterios de Análisis
+### 1.2 Umbrales de Alerta y Criterios de Análisis⚙️
 
 Para cada tipo de intrusión, se establecerán los siguientes umbrales y criterios:
 
@@ -61,7 +61,7 @@ Para cada tipo de intrusión, se establecerán los siguientes umbrales y criteri
    - Criterio: Monitoreo de tablas ARP y análisis de cambios sospechosos.
    - Metodología: Implementación de algoritmos de detección de anomalías en protocolos de red.
 
-### 1.3 Requisitos de Rendimiento y Disponibilidad
+### 1.3 Requisitos de Rendimiento y Disponibilidad 📈
 
 1. **Rendimiento**:
    - Capacidad de procesar al menos 10,000 paquetes por segundo en tiempo real.
@@ -85,9 +85,9 @@ Para cada tipo de intrusión, se establecerán los siguientes umbrales y criteri
    - Capacidad de escalar automáticamente basado en la carga del sistema.
    - Soporte para múltiples instancias de cada microservicio.
 
-## 2. Arquitectura del Sistema usando Microservicios
+## 2. Arquitectura del Sistema usando Microservicios 🏗️
 
-### 2.1 División en Microservicios Independientes
+### 2.1 División en Microservicios Independientes 🔧
 
 El sistema se dividirá en los siguientes microservicios:
 
@@ -100,7 +100,7 @@ El sistema se dividirá en los siguientes microservicios:
 7. **Servicio de Configuración (Configuration Service)**
 8. **Servicio de Logs (Logging Service)**
 
-### 2.2 Componentes Principales
+### 2.2 Componentes Principales 🗂️
 
 #### 2.2.1 Capturador de Paquetes (Packet Capture Service)
 
