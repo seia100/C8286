@@ -93,14 +93,14 @@ El sistema se dividirá en los siguientes microservicios:
 
 1. **Capturador de Paquetes (Packet Capture Service)**
 2. **Analizador de Datos (Data Analysis Service)**
-3. **Gestor de Alertas (Alert Manager Service)**
-4. **Base de Datos (Database Service)**
-5. **Interfaz de Usuario (UI Service)**
+3. **Base de Datos (Database Service)**
+4. **Interfaz de Usuario (UI Service)**
+5. **Gestor de Alertas (Alert Manager Service)**
 6. **Servicio de Autenticación (Authentication Service)**
 7. **Servicio de Configuración (Configuration Service)**
 8. **Servicio de Logs (Logging Service)**
 
-### 2.2 Componentes Principales 🗂️
+### 2.2 Componentes Principales 🗂️🥇
 
 #### 2.2.1 Capturador de Paquetes (Packet Capture Service)
 
@@ -149,7 +149,51 @@ El sistema se dividirá en los siguientes microservicios:
    - Configurar los entornos de ejecución de Spark para aprovechar las capacidades de GPU cuando sea relevante para las tareas de machine learning.
 
 
-#### 2.2.3 Gestor de Alertas (Alert Manager Service)
+
+#### 2.2.3 Base de Datos (Database Service)
+Servicio de Persistencia y Consulta de Datos (DPQS)
+
+**Responsabilidades**:
+- Almacenamiento persistente de logs, alertas y configuraciones.
+- Gestión de consultas para análisis históricos y generación de informes.
+- Soporte para consultas complejas y análisis forense (opcional)
+
+**Tecnologías**:
+- MongoDB para almacenamiento de datos no estructurados (logs y alertas).
+   - MongoDB desplegado como StatefulSet en Kubernetes 
+- PostgreSQL para datos estructurados (configuraciones y metadatos).
+   - PostgreSQL desplegado como StatefulSet con operador específico
+- Redis para caché y almacenamiento en memoria de datos frecuentemente accedidos.
+   - Redis desplegado como StatefulSet para caché distribuido 
+
+**Escalabilidad**:
+- Configurar StorageClass en Kubernetes para proporcionar almacenamiento persistente dinámicamente según las necesidades de los pods.
+- Implementar CronJobs para realizar backups automáticos de los datos críticos, asegurando la recuperación de datos en caso de fallo.
+- Implementar servicios headless para permitir la comunicación directa entre los pods, mejorando la eficiencia.
+- Configurar MongoDB con sharding basado en rangos temporales para distribuir los datos de manera eficiente.
+- Implementar la replicación de bases de datos para asegurar alta disponibilidad y mejorar el rendimiento de lectura.
+- Utilizar técnicas de compresión avanzada y tiering de almacenamiento para optimizar el uso y el rendimiento del almacenamiento.
+
+#### 2.2.4 Interfaz de Usuario (UI Service)
+Servicio de Interfaz de Usuario y Visualización (UIVS)
+
+**Responsabilidades**:
+- Presentación de dashboards y visualizaciones de alertas y estadísticas.
+- Interfaz para configuración del sistema y gestión de reglas de detección.
+- Visualización de logs y herramientas de búsqueda avanzada.
+
+**Tecnologías**:
+- React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado (tratare de interactuar con estas tecnologías). Caso contrario usaré herremientas como lo es Dart(Flutter).
+- Nginx como servidor web dentro del contenedor
+- D3.js y WebGL para visualizaciones de datos de alto rendimiento.
+- GraphQL y Apollo para una API flexible que permita consultas eficientes desde el frontend. Estos estaran contenerizados.
+
+**Escalabilidad**:
+- Implementación de server-side rendering para mejorar el rendimiento.
+   - Implementación de técnicas de Code Splitting y Lazy Loading para optimización de carga.
+- Uso de [CDN](https://aws.amazon.com/es/what-is/cdn/) para distribución global de assets estáticos. Es decir, la autilizacion de [_Edge Computing_](https://www.ibm.com/es-es/topics/edge-computing) para la distribucion global de contenido estático y dinámico nos permite ver diferentes directrices de desarrollo.
+
+#### 2.2.5 Gestor de Alertas (Alert Manager Service)
 
 **Responsabilidades**:
 - Recepción y procesamiento de alertas generadas por el Analizador de Datos.
@@ -175,50 +219,7 @@ El sistema se dividirá en los siguientes microservicios:
 - Utilizar ConfigMaps para gestionar las configuraciones de la aplicación, permitiendo cambios dinámicos y centralizados.
 - Implementar PodDisruptionBudget para asegurar que siempre haya un número mínimo de pods disponibles durante actualizaciones o eventos de mantenimiento.
 
-
-#### 2.2.4 Base de Datos (Database Service)
-Servicio de Persistencia y Consulta de Datos (DPQS)
-
-**Responsabilidades**:
-- Almacenamiento persistente de logs, alertas y configuraciones.
-- Gestión de consultas para análisis históricos y generación de informes.
-- Soporte para consultas complejas y análisis forense (opcional)
-
-**Tecnologías**:
-- MongoDB para almacenamiento de datos no estructurados (logs y alertas).
-   - MongoDB desplegado como StatefulSet en Kubernetes 
-- PostgreSQL para datos estructurados (configuraciones y metadatos).
-   - PostgreSQL desplegado como StatefulSet con operador específico
-- Redis para caché y almacenamiento en memoria de datos frecuentemente accedidos.
-   - Redis desplegado como StatefulSet para caché distribuido 
-
-**Escalabilidad**:
-- Configurar StorageClass en Kubernetes para proporcionar almacenamiento persistente dinámicamente según las necesidades de los pods.
-- Implementar CronJobs para realizar backups automáticos de los datos críticos, asegurando la recuperación de datos en caso de fallo.
-- Implementar servicios headless para permitir la comunicación directa entre los pods, mejorando la eficiencia.
-- Configurar MongoDB con sharding basado en rangos temporales para distribuir los datos de manera eficiente.
-- Implementar la replicación de bases de datos para asegurar alta disponibilidad y mejorar el rendimiento de lectura.
-- Utilizar técnicas de compresión avanzada y tiering de almacenamiento para optimizar el uso y el rendimiento del almacenamiento.
-
-#### 2.2.5 Interfaz de Usuario (UI Service)
-Servicio de Interfaz de Usuario y Visualización (UIVS)
-
-**Responsabilidades**:
-- Presentación de dashboards y visualizaciones de alertas y estadísticas.
-- Interfaz para configuración del sistema y gestión de reglas de detección.
-- Visualización de logs y herramientas de búsqueda avanzada.
-
-**Tecnologías**:
-- React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado (tratare de interactuar con estas tecnologías). Caso contrario usaré herremientas como lo es Dart(Flutter).
-- Nginx como servidor web dentro del contenedor
-- D3.js y WebGL para visualizaciones de datos de alto rendimiento.
-- GraphQL y Apollo para una API flexible que permita consultas eficientes desde el frontend. Estos estaran contenerizados.
-
-**Escalabilidad**:
-- Implementación de server-side rendering para mejorar el rendimiento.
-   - Implementación de técnicas de Code Splitting y Lazy Loading para optimización de carga.
-- Uso de [CDN](https://aws.amazon.com/es/what-is/cdn/) para distribución global de assets estáticos. Es decir, la autilizacion de [_Edge Computing_](https://www.ibm.com/es-es/topics/edge-computing) para la distribucion global de contenido estático y dinámico nos permite ver diferentes directrices de desarrollo.
-
+### Componentes secundarios 🥈
 
 #### 2.2.6 Servicio de Autenticación (Authentication Service)
 Servicio de Autenticación y Control de Acceso (AACS)
