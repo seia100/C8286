@@ -1,0 +1,153 @@
+# kubernetes-config.yaml
+
+---
+# Configuración para el Capturador de Paquetes
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: packet-capture
+spec:
+  replicas: 1 # Número de réplicas del deployment
+  selector:
+    matchLabels:
+      app: packet-capture # Etiqueta para seleccionar los pods
+  template:
+    metadata:
+      labels:
+        app: packet-capture # Etiqueta para los pods
+    spec:
+      containers:
+      - name: packet-capture # Nombre del contenedor
+        image: packet-capture:latest # Imagen del contenedor
+        imagePullPolicy: Never # Política para descargar la imagen
+        securityContext: # Contexto de seguridad
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"] # Capacidades adicionales para el contenedor
+        resources: # Recursos del contenedor
+          limits:
+            cpu: "1" # Límite de CPU
+            memory: "512Mi" # Límite de memoria
+          requests:
+            cpu: "0.5" # Solicitud de CPU
+            memory: "256Mi" # Solicitud de memoria
+
+---
+# Configuración para el Analizador de Datos
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-analysis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-analysis
+  template:
+    metadata:
+      labels:
+        app: data-analysis
+    spec:
+      containers:
+      - name: data-analysis
+        image: data-analysis:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "0.5"
+            memory: "512Mi"
+
+---
+# Configuración para la Base de Datos (MongoDB)
+apiVersion: apps/v1
+kind: StatefulSet # Utiliza un StatefulSet para la base de datos
+metadata:
+  name: mongodb
+spec:
+  serviceName: "mongodb" # Nombre del servicio asociado
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017 # Puerto del contenedor
+        volumeMounts: # Montajes de volumen
+        - name: mongodb-data # Nombre del volumen
+          mountPath: /data/db # Ruta de montaje
+  volumeClaimTemplates: # Plantillas de volumen
+  - metadata:
+      name: mongodb-data # Nombre del volumen
+    spec:
+      accessModes: ["ReadWriteOnce"] # Modo de acceso al volumen
+      resources:
+        requests:
+          storage: 1Gi # Tamaño del volumen
+
+---
+# Servicio para MongoDB
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app: mongodb # Selecciona los pods con la etiqueta "app: mongodb"
+  ports:
+    - protocol: TCP # Protocolo del puerto
+      port: 27017 # Puerto del servicio
+      targetPort: 27017 # Puerto del contenedor
+
+---
+# Configuración para la Interfaz de Usuario
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ui
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - name: ui
+        image: ui:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000 # Puerto del contenedor
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+          requests:
+            cpu: "0.2"
+            memory: "256Mi"
+
+---
+# Servicio para la Interfaz de Usuario
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui
+spec:
+  type: LoadBalancer # Tipo de servicio (LoadBalancer para exponerlo externamente)
+  selector:
+    app: ui # Selecciona los pods con la etiqueta "app: ui"
+  ports:
+    - protocol: TCP # Protocolo del puerto
+      port: 80 # Puerto del servicio
+      targetPort: 3000 # Puerto del contenedor
