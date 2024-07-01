@@ -183,10 +183,13 @@ Servicio de Interfaz de Usuario y Visualización (UIVS)
 - Visualización de logs y herramientas de búsqueda avanzada.
 
 **Tecnologías**:
-- React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado (tratare de interactuar con estas tecnologías). Caso contrario usaré herremientas como lo es Dart(Flutter).
-- Nginx como servidor web dentro del contenedor
-- D3.js y WebGL para visualizaciones de datos de alto rendimiento.
-- GraphQL y Apollo para una API flexible que permita consultas eficientes desde el frontend. Estos estaran contenerizados.
+- **Por lo pronto**
+   - Una interfaz muy sencilla con un html y un archivo de flask.
+- **Mejor de los casos**
+   - React.js para el frontend, permitiendo una interfaz de usuario dinámica y responsive. React con TypeScript para desarrollo de frontend robusto y tipado.   
+   - Nginx como servidor web dentro del contenedor
+   - D3.js y WebGL para visualizaciones de datos de alto rendimiento.
+   - GraphQL y Apollo para una API flexible que permita consultas eficientes desde el frontend. Estos estaran contenerizados.
 
 **Escalabilidad**:
 - Implementación de server-side rendering para mejorar el rendimiento.
