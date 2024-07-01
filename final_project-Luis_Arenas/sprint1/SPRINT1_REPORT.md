@@ -42,6 +42,7 @@ Implementa métodos para almacenar y recuperar paquetes de red.
 Utiliza batch inserts para optimizar el rendimiento de escritura.
 
 **codigo_relevante**:
+
 ```python
 class DataStorage:
     def __init__(self):
