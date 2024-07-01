@@ -35,6 +35,22 @@ graph TD
     G --> F
 
 ```
+y con más detalles
+![architecture_diagram](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint1/data/diagram_arch_dIDS.drawio.svg)
+
+- Kubernetes Cluster: Todo el sistema está encapsulado dentro de un clúster de Kubernetes, lo que permite una gestión y escalado eficientes de los componentes.
+- Capturador de Paquetes: Intercepta el tráfico de red entrante.
+- Cola de Mensajes: Actúa como buffer entre la captura de paquetes y el análisis, permitiendo un procesamiento asíncrono.
+- Analizador de Datos: Procesa los paquetes de la cola, apoyándose en los módulos de Machine Learning y Análisis de Comportamiento.
+- Motor de Reglas: Evalúa los datos analizados contra un conjunto de reglas predefinidas.
+- Generador de Alertas: Crea alertas basadas en las actividades sospechosas identificadas.
+- MongoDB: Almacena todos los datos, incluyendo paquetes capturados, resultados de análisis y alertas.
+- API Backend: Proporciona una interfaz para que la UI acceda a los datos y funcionalidades del sistema.
+- Interfaz de Usuario: Permite a los usuarios interactuar con el sistema, visualizar alertas y configurar parámetros.
+- Módulos de ML y Análisis de Comportamiento: Asisten al Analizador de Datos en la detección de anomalías y patrones sospechosos.
+
+Este diagrama muestra claramente el flujo de datos a través del sistema, desde la captura de paquetes hasta la generación de alertas y la interacción del usuario. También ilustra cómo los diferentes componentes se comunican entre sí dentro del clúster de Kubernetes.
+
 ## Componentes Principales
 
 - **Capturador de Paquetes:**
@@ -195,21 +211,6 @@ Este diagrama detallado muestra el flujo de datos a través de los diferentes co
 
 Esta arquitectura permite un procesamiento eficiente y escalable del tráfico de red, combinando técnicas de análisis en tiempo real con aprendizaje automático para una detección de intrusiones más precisa y adaptativa.
 
-### Diagrama de la arquitectura
-![architecture_diagram](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint1/data/diagram_arch_dIDS.drawio.svg)
-
-- Kubernetes Cluster: Todo el sistema está encapsulado dentro de un clúster de Kubernetes, lo que permite una gestión y escalado eficientes de los componentes.
-- Capturador de Paquetes: Intercepta el tráfico de red entrante.
-- Cola de Mensajes: Actúa como buffer entre la captura de paquetes y el análisis, permitiendo un procesamiento asíncrono.
-- Analizador de Datos: Procesa los paquetes de la cola, apoyándose en los módulos de Machine Learning y Análisis de Comportamiento.
-- Motor de Reglas: Evalúa los datos analizados contra un conjunto de reglas predefinidas.
-- Generador de Alertas: Crea alertas basadas en las actividades sospechosas identificadas.
-- MongoDB: Almacena todos los datos, incluyendo paquetes capturados, resultados de análisis y alertas.
-- API Backend: Proporciona una interfaz para que la UI acceda a los datos y funcionalidades del sistema.
-- Interfaz de Usuario: Permite a los usuarios interactuar con el sistema, visualizar alertas y configurar parámetros.
-- Módulos de ML y Análisis de Comportamiento: Asisten al Analizador de Datos en la detección de anomalías y patrones sospechosos.
-
-Este diagrama muestra claramente el flujo de datos a través del sistema, desde la captura de paquetes hasta la generación de alertas y la interacción del usuario. También ilustra cómo los diferentes componentes se comunican entre sí dentro del clúster de Kubernetes.
 
 ## Referencias
 
