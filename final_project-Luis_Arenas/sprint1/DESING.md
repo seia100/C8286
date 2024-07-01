@@ -21,21 +21,6 @@ El dIDS sigue una arquitectura de microservicios containerizada, desplegada en u
 
 ### Diagrama de Arquitectura
 
-```mermaid
-graph TD
-    A[Tráfico de Red] --> B[Capturador de Paquetes]
-    B --> C[Cola de Mensajes]
-    C --> D[Analizador de Datos]
-    D --> E[Base de Datos MongoDB]
-    E --> F[Interfaz de Usuario]
-    G[Kubernetes Cluster] --> B
-    G --> C
-    G --> D
-    G --> E
-    G --> F
-
-```
-y con más detalles
 ![architecture_diagram](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint1/data/diagram_arch_dIDS.drawio.svg)
 
 - Kubernetes Cluster: Todo el sistema está encapsulado dentro de un clúster de Kubernetes, lo que permite una gestión y escalado eficientes de los componentes.
