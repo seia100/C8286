@@ -164,6 +164,37 @@ sequenceDiagram
 
 Este diagrama ilustra el flujo de datos y la secuencia de operaciones en el sistema dIDS.
 
+
+
+
+### Diagrama de Flujo de Datos
+```mermaid
+graph TD
+    A[Tráfico de Red] --> B[Capturador de Paquetes]
+    B --> C[Cola de Mensajes]
+    C --> D[Analizador de Datos]
+    D --> E[Base de Datos]
+    D --> F[Motor de Reglas]
+    F --> G[Generador de Alertas]
+    G --> H[Interfaz de Usuario]
+    E --> H
+    I[Módulo de Machine Learning] --> D
+    J[Módulo de Análisis de Comportamiento] --> D
+```
+Este diagrama detallado muestra el flujo de datos a través de los diferentes componentes del sistema dIDS:
+
+- El tráfico de red es interceptado por el Capturador de Paquetes.
+- Los paquetes capturados se envían a una Cola de Mensajes para su procesamiento asíncrono.
+- El Analizador de Datos procesa los paquetes de la cola.
+- El análisis se apoya en un Módulo de Machine Learning y un Módulo de Análisis de Comportamiento para detectar anomalías y patrones sospechosos.
+- Los resultados del análisis se almacenan en la Base de Datos y se pasan al Motor de Reglas.
+- El Motor de Reglas evalúa los resultados del análisis según las reglas predefinidas.
+- Si se detectan actividades sospechosas, el Generador de Alertas crea las alertas correspondientes.
+- La Interfaz de Usuario muestra las alertas y permite acceder a los datos almacenados en la Base de Datos.
+
+Esta arquitectura permite un procesamiento eficiente y escalable del tráfico de red, combinando técnicas de análisis en tiempo real con aprendizaje automático para una detección de intrusiones más precisa y adaptativa.
+
+
 ## Referencias
 
 - [Kubernetes Documentation](https://kubernetes.io/es/docs/)
