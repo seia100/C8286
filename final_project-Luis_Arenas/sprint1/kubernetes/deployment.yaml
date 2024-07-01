@@ -1,0 +1,33 @@
+apiVersion: apps/v1  # Especifica la versión de la API de Kubernetes que se está utilizando
+kind: Deployment  # Define el tipo de objeto, en este caso un Deployment
+metadata:  # Metadatos que identifican al Deployment
+  name: ids-system  # Nombre del Deployment
+spec:  # Especificaciones del Deployment
+  replicas: 1  # Número de réplicas del pod
+  selector:  # Selector que define cómo identificar los pods gestionados por este Deployment
+    matchLabels:  # Etiquetas que deben coincidir para que los pods sean gestionados por este Deployment
+      app: ids-system  # Etiqueta que deben tener los pods
+  template:  # Plantilla para los pods gestionados por este Deployment
+    metadata:  # Metadatos para los pods
+      labels:  # Etiquetas para los pods
+        app: ids-system  # Etiqueta del pod
+    spec:  # Especificaciones del pod
+      containers:  # Lista de contenedores que se ejecutarán en cada pod
+      - name: ids-system  # Nombre del contenedor
+        image: ids-system:latest  # Nombre y versión de la imagen Docker del contenedor
+        imagePullPolicy: Never  # Política de obtención de la imagen: no intenta descargar la imagen, usa la local
+        securityContext:  # Configuración de seguridad para el contenedor
+          capabilities:  # Capacidades adicionales para el contenedor
+            add: ["MET_ADMIN", "NET_RAW"]  # Permisos necesarios para captura de paquetes
+        env:  # Variables de entorno para el contenedor
+        - name: MONGODB_HOST  # Nombre de la variable de entorno
+          value: mongodb  # Valor de la variable: nombre del servicio de MongoDB
+        - name: MONGODB_PORT  # Nombre de la variable de entorno
+          value: "27017"  # Valor de la variable: puerto del servicio de MongoDB
+        resources:  # Especificaciones de los recursos asignados al contenedor
+          limits:  # Límites máximos de recursos que puede usar el contenedor
+            cpu: "2"  # Límite máximo de CPU
+            memory: "1Gi"  # Límite máximo de memoria
+          requests:  # Solicitudes mínimas de recursos que necesita el contenedor
+            cpu: "1"  # Solicitud mínima de CPU
+            memory: "512Mi"  # Solicitud mínima de memoria

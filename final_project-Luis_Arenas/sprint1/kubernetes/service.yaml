@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ids-system
+spec:
+  selector:
+    app: ids-system
+  ports:
+  - protocol: TCP
+    port: 5000 # puerto expuesto del servicio
+    targetPort: 5000 # puerto del contenedor
