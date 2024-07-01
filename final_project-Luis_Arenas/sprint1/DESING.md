@@ -160,6 +160,30 @@ classDiagram
 ```
 Este diagrama muestra las principales clases y sus relaciones en el sistema dIDS.
 
+Este diagrama de clases ilustra las principales componentes del sistema de detección de intrusos basado en red (dIDS) y sus interacciones.
+
+- **PacketCapture**: Este componente es responsable de capturar y procesar los paquetes de red.
+    capture_packets(): Captura los paquetes de red.
+    process_packets(): Procesa los paquetes capturados.
+
+- **DataAnalysis**: Este componente se encarga de analizar el tráfico de red para detectar posibles anomalías.
+    analyze_traffic(): Analiza el tráfico de red.
+    detect_anomalies(): Detecta anomalías en el tráfico analizado.
+
+- **DataStorage**: Este componente almacena los datos de los paquetes capturados y los resultados del análisis.
+    store_packet(): Almacena los paquetes de red.
+    get_packets(): Recupera los paquetes almacenados.
+
+- **UserInterface**: Este componente proporciona la interfaz de usuario para mostrar las alertas y estadísticas.
+    display_alerts(): Muestra las alertas generadas por el sistema.
+    show_statistics(): Muestra estadísticas relacionadas con el tráfico de red y las detecciones de anomalías.
+
+**Relaciones**:
+
+PacketCapture almacena los paquetes en DataStorage.
+DataAnalysis lee y escribe en DataStorage.
+UserInterface lee los datos de DataStorage.
+
 ### Diagrama de Secuencia
 
 ```mermaid
@@ -181,6 +205,38 @@ sequenceDiagram
 
 Este diagrama ilustra el flujo de datos y la secuencia de operaciones en el sistema dIDS.
 
+Este diagrama de secuencia muestra el flujo de datos y las interacciones entre los componentes del sistema dIDS durante el proceso de detección de intrusos.
+
+- **Network (N):** Representa la red desde donde se origina el tráfico.
+    Network Traffic: El tráfico de red que es capturado por el sistema.
+
+- **PacketCapture (PC)**: Captura el tráfico de la red.
+    Store Raw Packets: Almacena los paquetes de red capturados en DataStorage.
+    Send for Analysis: Envía los paquetes capturados para su análisis a DataAnalysis.
+
+- **DataAnalysis (DA)**: Analiza los paquetes y detecta anomalías.
+    Store Analysis Results: Almacena los resultados del análisis en DataStorage.
+    Send Alerts: Envía las alertas generadas a UserInterface.
+
+- **DataStorage (DS)**: Almacena los datos de los paquetes y los resultados del análisis.
+    Store Raw Packets: Recibe y almacena los paquetes de PacketCapture.
+    Store Analysis Results: Recibe y almacena los resultados del análisis de DataAnalysis.
+
+- **UserInterface (UI)**: Muestra las alertas y estadísticas al usuario.
+    Fetch Data: Recupera datos de DataStorage.
+    Display to User: Muestra la información al usuario.
+
+**Secuencia de Operaciones:**
+
+i. El tráfico de red es capturado por PacketCapture.
+ii. PacketCapture almacena los paquetes en DataStorage.
+iii. PacketCapture envía los paquetes capturados para su análisis a DataAnalysis.
+iv. DataAnalysis almacena los resultados del análisis en DataStorage.
+v. DataAnalysis envía las alertas generadas a UserInterface.
+vi. UserInterface recupera los datos necesarios de DataStorage.
+vii. UserInterface muestra la información al usuario final.
+
+Este flujo de datos asegura que el sistema pueda capturar, analizar, almacenar y mostrar información relevante sobre el tráfico de red y las posibles amenazas detectadas.
 
 
 
