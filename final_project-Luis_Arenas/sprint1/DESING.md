@@ -9,6 +9,7 @@
 6. [Consideraciones de Diseño](#consideraciones-de-diseño)
 7. [Diagramas](#diagramas)
 8. [Referencias](#referencias)
+9. [Conclusiones](#conclusiones)
 
 ## Visión General
 
@@ -207,7 +208,7 @@ Esta arquitectura permite un procesamiento eficiente y escalable del tráfico de
 - [Microservices Architecture](https://microservices.io/)
 - [Distributed Systems Design](https://medium.com/@nilesh.dabholkar/distributed-systems-design-patterns-architecting-for-scalability-and-reliability-d937a56ff347)
 
-
+## Conclusiones
 Este documento `DESIGN.md` proporciona una visión técnica y detallada de la arquitectura y diseño del sistema dIDS. Incluye diagramas para una mejor comprensión visual de la arquitectura, los componentes y el flujo de datos. Los diagramas se han creado utilizando la sintaxis de Mermaid, que es compatible con muchos visualizadores de Markdown y plataformas como GitHub.
 
 El diseño abarca los tres sprints del proyecto, considerando la captura de paquetes, el análisis de datos y la interfaz de usuario. También se han incluido consideraciones importantes como la escalabilidad, el rendimiento y la seguridad.
