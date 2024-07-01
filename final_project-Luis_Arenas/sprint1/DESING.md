@@ -196,7 +196,7 @@ Este diagrama detallado muestra el flujo de datos a través de los diferentes co
 Esta arquitectura permite un procesamiento eficiente y escalable del tráfico de red, combinando técnicas de análisis en tiempo real con aprendizaje automático para una detección de intrusiones más precisa y adaptativa.
 
 ### Diagrama de la arquitectura
-
+![architecture_diagram](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint1/data/diagram_arch_dIDS.drawio.svg)
 
 ## Referencias
 
