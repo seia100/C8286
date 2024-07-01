@@ -229,11 +229,17 @@ Este diagrama de secuencia muestra el flujo de datos y las interacciones entre l
 **Secuencia de Operaciones:**
 
 i. El tráfico de red es capturado por PacketCapture.
+
 ii. PacketCapture almacena los paquetes en DataStorage.
+
 iii. PacketCapture envía los paquetes capturados para su análisis a DataAnalysis.
+
 iv. DataAnalysis almacena los resultados del análisis en DataStorage.
+
 v. DataAnalysis envía las alertas generadas a UserInterface.
+
 vi. UserInterface recupera los datos necesarios de DataStorage.
+
 vii. UserInterface muestra la información al usuario final.
 
 Este flujo de datos asegura que el sistema pueda capturar, analizar, almacenar y mostrar información relevante sobre el tráfico de red y las posibles amenazas detectadas.
