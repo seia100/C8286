@@ -194,7 +194,7 @@ La implementación de Kubernetes resultó en una mejora del 83.33% en el tiempo 
 
 ## Análisis Comparativo de Rendimiento
 
-![Gráfico de Rendimiento](https://via.placeholder.com/500x300.png?text=Gráfico+de+Rendimiento+Comparativo)
+![Gráfico de Rendimiento](https://github.com/seia100/C8286/blob/main/final_project-Luis_Arenas/sprint2/assets/Screenshot%202024-06-28%20160330.png)
 
 El gráfico anterior muestra una comparación del rendimiento del sistema antes y después de las mejoras del Sprint 2. Se observa un aumento significativo en la capacidad de procesamiento y una reducción en los tiempos de respuesta.
 
