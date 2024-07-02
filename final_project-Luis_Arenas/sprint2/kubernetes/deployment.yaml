@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ids-system
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ids-system
+  template:
+    metadata:
+      labels:
+        app: ids-system
+    spec:
+      containers:
+      - name: ids-system
+        image: ids-system:latest
+        imagePullPolicy: Never
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN", "NET_RAW"]
+        env:
+        - name: MONGODB_HOST
+          value: mongodb
+        - name: MONGODB_PORT
+          value: "27017"
+        - name: GRPC_PORT
+          value: "50051"
+        resources:
+          limits:
+            cpu: "2"
+            memory: "2Gi"
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+        ports:
+        - containerPort: 50051 # puerto grpc
+          name: grpc
+        readinessProbe:
+          tcpSocket:
+            port: 50051
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 50051
+          initialDelaySeconds: 15
+          periodSeconds: 20

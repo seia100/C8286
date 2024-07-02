@@ -1,0 +1,26 @@
+syntax = "proto3";  // Specifies that this file uses Proto3 syntax.
+
+package ids;  // Declares the package for this protobuf. It helps prevent naming conflicts.
+
+// Defines a gRPC service named IDSService.
+service IDSService {
+  // Declares a remote procedure call (RPC) method AnalyzePacket.
+  // It takes a message of type Packet and returns a message of type AnalysisResult.
+  rpc AnalyzePacket (Packet) returns (AnalysisResult) {}
+}
+
+// Defines the structure for a network packet that will be analyzed.
+message Packet {
+  string src_ip = 1;     // Source IP address of the packet.
+  string dst_ip = 2;     // Destination IP address of the packet.
+  int32 src_port = 3;    // Source port number.
+  int32 dst_port = 4;    // Destination port number.
+  string protocol = 5;   // Protocol used (e.g., TCP, UDP).
+  bytes payload = 6;     // The actual data being transmitted.
+}
+
+// Defines the result of the analysis.
+message AnalysisResult {
+  bool is_threat = 1;      // True if the packet is determined to be a threat.
+  string threat_type = 2;  // Describes the type of threat (e.g., "SQL Injection", "XSS").
+}
