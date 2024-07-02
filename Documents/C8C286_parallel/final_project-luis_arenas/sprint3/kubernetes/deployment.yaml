@@ -1,0 +1,50 @@
+apiVersion: apps/v1  # Versión de la API de Kubernetes para Deployments
+kind: Deployment     # Tipo de recurso: Deployment
+metadata:
+  name: ids-system   # Nombre del Deployment
+spec:
+  replicas: 3        # Número de réplicas (pods) a mantener
+  selector:
+    matchLabels:
+      app: ids-system  # Selector para identificar los pods de este Deployment
+  template:
+    metadata:
+      labels:
+        app: ids-system  # Etiqueta aplicada a los pods creados por este Deployment
+    spec:
+      containers:
+      - name: ids-system  # Nombre del contenedor
+        image: localhost:5000/ids-system:v3  # Imagen Docker (usando un registro local)
+        ports:
+        - containerPort: 5000  # Puerto expuesto por el contenedor
+        resources:
+          limits:
+            cpu: "1"     # Límite máximo de CPU
+            memory: "1Gi"  # Límite máximo de memoria
+          requests:
+            cpu: "500m"    # Solicitud mínima de CPU
+            memory: "512Mi"  # Solicitud mínima de memoria
+        env:
+        - name: MONGODB_URI  # Variable de entorno para la conexión a MongoDB
+          valueFrom:
+            secretKeyRef:
+              name: ids-secrets
+              key: mongodb-uri
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ids-secrets
+              key: api-key
+
+        livenessProbe:  # Sonda para verificar si el contenedor está vivo
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:  # Sonda para verificar si el contenedor está listo para recibir tráfico
+          httpGet:
+            path: /ready
+            port: 5000
+          initialDelaySeconds: 15
+          periodSeconds: 5

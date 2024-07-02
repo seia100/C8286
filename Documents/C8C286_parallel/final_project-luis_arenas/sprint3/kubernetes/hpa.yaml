@@ -1,0 +1,22 @@
+# HorizontalPodAutoscaler
+
+apiVersion: autoscaling/v2beta1  # Versión de la API para HPA
+kind: HorizontalPodAutoscaler    # Tipo de recurso: HorizontalPodAutoscaler
+metadata:
+  name: ids-hpa  # Nombre del HPA
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ids-system  # Nombre del Deployment a escalar
+  minReplicas: 3      # Número mínimo de réplicas
+  maxReplicas: 10     # Número máximo de réplicas
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 70  # Escalar si el uso promedio de CPU supera el 70%
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: 80  # Escalar si el uso promedio de memoria supera el 80%
