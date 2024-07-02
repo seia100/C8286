@@ -1,0 +1,12 @@
+apiVersion: v1  # Versión de la API de Kubernetes para Services
+kind: Service   # Tipo de recurso: Service
+metadata:
+  name: ids-service  # Nombre del Service
+spec:
+  selector:
+    app: ids-system  # Selector para identificar los pods a los que este Service enrutará el tráfico
+  ports:
+    - protocol: TCP  # Protocolo usado
+      port: 80       # Puerto en el que el Service escucha
+      targetPort: 5000  # Puerto del pod al que se enviará el tráfico
+  type: ClusterIP    # Tipo de Service: solo accesible dentro del cluster

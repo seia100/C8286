@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1  # Versión de la API de Kubernetes para Ingress
+kind: Ingress  # Tipo de recurso: Ingress
+metadata:
+  name: ids-ingress  # Nombre del Ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx  # Usar el controlador de Ingress NGINX
+spec:
+  rules:
+  - host: ids.local  # Hostname para acceder al IDS (requiere configuración local de DNS)
+    http:
+      paths:
+      - path: /  # Ruta a manejar
+        pathType: Prefix  # Tipo de coincidencia de ruta
+        backend:
+          service:
+            name: ids-service  # Nombre del Service al que se enrutará el tráfico
+            port: 
+              number: 80  # Puerto del Service
