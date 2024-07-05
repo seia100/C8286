@@ -1,5 +1,6 @@
 # Estructura de directorios para el Sprint 3:
 
+```
 sprint3/
 ├── kubernetes/
 │   ├── deployment.yaml
@@ -47,7 +48,7 @@ sprint3/
 ├── docker-compose.yaml
 ├── requirements.txt
 └── README.md
-
+```
 ### Descripción de los archivos nuevos y modificados:
 
 1. kubernetes/
