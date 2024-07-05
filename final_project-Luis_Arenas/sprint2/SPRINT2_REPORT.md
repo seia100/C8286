@@ -41,6 +41,33 @@ La arquitectura del sistema se basa en microservicios, permitiendo una alta modu
 5. Comunicación entre Servicios (gRPC)
 6. Interfaz de Usuario
 
+```
+sprint2
+├── Dockerfile
+├── kubernetes
+│   ├── deployment.yaml
+│   └── service.yaml
+├── requirements.txt
+├── src
+│   ├── analysis
+│   │   ├── clustering.py
+│   │   ├── init.py
+│   │   └── ml_analyzer.py
+│   ├── communication
+│   │   ├── grpc_service.py
+│   │   └── init.py
+│   └── detection
+│       ├── behavior_based.py
+│       ├── init.py
+│       └── signature_baseed.py
+└── tests
+    ├── test_analysis.py
+    ├── test_communication.py
+    ├── test_data_storage.py
+    ├── test_detection.py
+    └── test_packet_capture.py
+```
+
 ## Mejoras Algorítmicas
 
 ### Detección Basada en Firmas vs. Comportamiento
@@ -58,6 +85,7 @@ async def analyze_packet(self, packet):
         if self.behavior_model(packet):
             print(f"Alerta: Comportamiento sospechoso detectado de {packet[IP].src}")
 ```
+
 
 **Comparación de Rendimiento:**
 
